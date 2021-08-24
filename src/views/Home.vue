@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="AllTickets">
+    <div class="navigation-bar">
+      <v-icon>mdi-bars</v-icon>
+    </div>
+    <RaiseTicket />
+    <all-tickets></all-tickets>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import AllTickets from "../components/All-tickets.vue";
+import RaiseTicket from "../components/shared/RaiseTicket.vue";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+
+  component: {
+    RaiseTicket,
+    AllTickets,
   },
 };
 </script>
+
+
+
+
+<style>
+#navigation-icon {
+  padding: 10px 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  float: right;
+}
+i {
+  font-size: 1.5rem;
+}
+</style>
+
