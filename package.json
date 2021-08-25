@@ -1,9 +1,6 @@
 {
   "name": "microservicestreamdesk",
   "version": "0.1.0",
-  "engines": {
-    "node": "14.17.5"
-  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
