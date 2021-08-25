@@ -171,7 +171,7 @@ export default {
 <style>
 table {
   width: 100%;
-  border-top: 2px solid rgb(138, 138, 138);
+  border: 1px solid rgb(199, 199, 199);
   background: rgb(255, 254, 254);
 }
 
@@ -182,8 +182,8 @@ td {
 }
 
 th {
-  background-color: rgb(113, 199, 248);
-  color: white;
+  background-color: rgb(253, 254, 255);
+  color: rgb(0, 0, 0);
   padding: 2px;
   text-align: center;
 }

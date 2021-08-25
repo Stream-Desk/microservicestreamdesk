@@ -7,80 +7,23 @@
       <v-card-title primary-title class="modal-header">
         View Ticket
       </v-card-title>
-      <v-divider></v-divider>
       <v-card-text>
-        <div class="modal-body ng-star-inserted">
-          <div class="form-box row">
-            <div class="col-12 col-md-12">
-              <div form-group mb-2>
-                <div class="card" id="card">
-                  <div class="card-body bg-main-body border p-3 font-20">
-                    <div class="font-18 mb-1">Ticket #4556 -Bugs</div>
-                    <div class="font-13 mb-1"></div>
-                    <v-card-text class="font-14">
-                      Status: <span class="font-weight-bold">High</span>
-                    </v-card-text>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <v-system-bar color="primary" id="systembar">
+          <div>
+            <v-card-text> Ticket -4556 <span>Bugs</span> </v-card-text>
           </div>
+          <v-card-text> Status: <span id="spanopen">Open</span> </v-card-text>
+          <v-spacer></v-spacer>
+        </v-system-bar>
+        <div class="grid-container" style="grid-auto-flow: column">
+          <div class="item1">Bank:</div>
+          <div class="item2">Subject:</div>
+          <div class="item3">Category:</div>
+          <div class="item4">Date:</div>
         </div>
-        <div class="col-12 col-md-6">
-          <div class="form-group row mb-2">
-            <label class="col-5 col-md-4 col-form-label">Bank</label>
-            <div class="col-7 col-md-8 col-form-label">
-              <b>Admin</b>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="form-group row mb-2">
-            <label class="col-5 col-md-md-4 col-form-label">Subject</label>
-            <div class="col-7 col-md-8 col-form-label">
-              <b>System Request</b>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="form-group row mb-2">
-            <label class="col-5 col-md-md-4 col-form-label">Category</label>
-            <div class="col-7 col-md-8 col-form-label">
-              <b>Malware</b>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6">
-          <div class="form-group row mb-2">
-            <label class="col-5 col-md-md-4 col-form-label">Date Issued</label>
-            <div class="col-7 col-md-8 col-form-label">
-              <b>16-Aug-2021 10:30</b>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-12 mb-2">
-          <div class="form-group row mb-2">
-            <label class="col-12 col-md-2 col-form-label">Description</label>
-            <div class="col-12 col-md-10 col-form-label overflow_chart">
-              The system is slow
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-12">
-          <div class="form-group row mb-2">
-            <label class="col-12 col-md-2 col-form-label">Attachments</label>
-            <div class="col-12 col-md-10 col-form-label overflow_chart">
-              <table
-                class="
-                  table table-bordered table-striped
-                  small-btn
-                  table-attachment
-                "
-              >
-                <tr class="ng-star-inserted"></tr>
-              </table>
-            </div>
-          </div>
+        <div class="grid-container" style="grid-auto-flow: column">
+          <div class="item1">Description:</div>
+          <div class="item2">Attachment</div>
         </div>
       </v-card-text>
 
@@ -88,7 +31,16 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn type="button" text @click="dialog = false"> Close </v-btn>
+        <v-btn
+          type="button"
+          text
+          @click="dialog = false"
+          variant="outlined"
+          rounded="pill"
+          id="close"
+        >
+          Close
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -118,6 +70,16 @@ export default {
   border-radius: 4px;
   color: black;
 }
+#spanopen {
+  color: black;
+  font-weight: bold;
+}
+#systembar {
+  border: 1px solid rgb(189, 189, 189);
+}
+#close {
+  width: 100px;
+}
 .modal-header {
   display: flex;
   align-items: flex-start;
@@ -145,5 +107,17 @@ export default {
   width: 10px;
   color: white;
   background-color: rgb(253, 253, 253);
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 5px;
+  padding: 5px;
+}
+.grid-container > div {
+  text-align: left;
+  padding: 5px 0;
+  font-size: 15px;
 }
 </style>
