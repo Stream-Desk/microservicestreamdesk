@@ -27,13 +27,14 @@
                 outlined
                 v-model="ticket.summary"
               />
+
               <label for="category"
                 >Category <span class="required">*</span></label
               >
-              <select v-model.lazy="category" v-model="ticket.category">
-                <option value="Bugs">Slow Updates</option>
-                <option value="Display">Slow displays</option>
-                <option value="Blue screen">No displays</option>
+              <select v-model="ticket.category">
+                <option value="display">Slow display</option>
+                <option value="authentication">Authentication failure</option>
+                <option value="login">Log in failure</option>
               </select>
               <label for="textarea">Description*</label>
               <textarea

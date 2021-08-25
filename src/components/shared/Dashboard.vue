@@ -28,11 +28,6 @@
             <slot></slot>
           </edit-ticket>
         </div>
-        <div class="btn">
-          <view-ticket>
-            <slot></slot>
-          </view-ticket>
-        </div>
       </div>
     </v-card>
   </v-container>
@@ -41,7 +36,7 @@
 <script>
 import RaiseTicket from "../shared/RaiseTicket.vue";
 import EditTicket from "../shared/EditTicketPopup.vue";
-import ViewTicket from "../shared/ViewDialog.vue";
+
 // import DraftTable from "../shared/DraftTable.vue";
 
 export default {
@@ -49,7 +44,6 @@ export default {
   components: {
     RaiseTicket: RaiseTicket,
     EditTicket: EditTicket,
-    ViewTicket: ViewTicket,
   },
   data() {
     return {

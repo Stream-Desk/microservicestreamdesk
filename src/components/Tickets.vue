@@ -48,7 +48,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <sent-ticket-pop>
+      <sent-ticket-pop @click="updateTicket">
         <slot></slot>
       </sent-ticket-pop>
     </v-card-actions>
