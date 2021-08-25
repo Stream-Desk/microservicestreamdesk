@@ -28,7 +28,6 @@
             Send</v-btn
           >
         </div>
-
         <v-divider class="mx-4" vertical></v-divider>
         <v-spacer></v-spacer>
         <v-divider class="mx-4" vertical></v-divider>

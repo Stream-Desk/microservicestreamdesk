@@ -4,19 +4,21 @@
       <router-view />
 
       <dashboard></dashboard>
-      <all-tickets></all-tickets>
+
+      <!-- <all-tickets></all-tickets> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-import AllTickets from "./components/All-tickets.vue";
+// import AllTickets from "./components/All-tickets.vue";
 import Dashboard from "./components/shared/Dashboard.vue";
+
 export default {
   name: "App",
 
   components: {
-    AllTickets,
+    // AllTickets,
     Dashboard,
   },
   data: () => ({

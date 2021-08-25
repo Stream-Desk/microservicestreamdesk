@@ -1,7 +1,7 @@
-<template>
+<template v-slot:tickets>
   <v-container class="dashboard">
     <v-card elevation="2">
-      <div class="allTicket">All Tickets</div>
+      <!-- <div class="allTicket">All Tickets</div> -->
 
       <table hover table-striped class="table">
         <thead>
@@ -215,7 +215,6 @@ tr:hover .hover {
 }
 .allTicket {
   padding-left: 10px;
-
   text-transform: capitalize;
   letter-spacing: 0.6em;
   font-size: 1em;

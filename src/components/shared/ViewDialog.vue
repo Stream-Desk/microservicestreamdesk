@@ -1,9 +1,9 @@
 <template v-slot:details>
-  <v-btn v-on="on" @click="onOpen" id="search">
-    <i class="fas fa-search" id="fa"></i>
+  <v-btn depresses v-on="on" @click="onOpen" id="search">
+    <i class="fas fa-eye" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog" persistent>
-    <v-card :elevation="hover ? 24 : 3" width="600px">
+    <v-card :elevation="hover ? 24 : 3" width="500px">
       <v-card-title primary-title class="modal-header">
         View Ticket
       </v-card-title>
@@ -110,6 +110,14 @@ export default {
 </script>
 
 <style scoped>
+#fa {
+  padding: 5px;
+  height: 35px;
+  top: 223px;
+  left: 173px;
+  border-radius: 4px;
+  color: black;
+}
 .modal-header {
   display: flex;
   align-items: flex-start;
@@ -124,16 +132,18 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
+  min-width: 12px;
   word-wrap: break-word;
   background-color: #f6f8fa;
   background-clip: border-box;
-  border-radius: 5px;
+  border-radius: 4px;
+  border: 1px solid #c4c4c4;
 }
 #search {
-  margin-left: 70%;
+  margin-left: -20%;
   margin-top: 20px;
+  width: 10px;
   color: white;
-  background-color: rgb(14, 80, 204);
+  background-color: rgb(253, 253, 253);
 }
 </style>

@@ -1,26 +1,25 @@
 <template v-slot:edit>
   <v-btn
     depressed
-    flat
-    color="red-lighten-1"
     text-color="white"
     ma-4
     @click="onClickEditTicket"
     id="contain"
     v-on="on"
   >
-    <i class="fas fa-edit"></i>
+    <i class="fas fa-pen" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog">
-    <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="500">
+    <v-card
+      :elevation="hover ? 24 : 3"
+      mb-4
+      class="mx-auto"
+      max-width="450"
+      my-2
+    >
       <v-card-title primary-title class="justify-center" id="title">
         Edit Ticket
       </v-card-title>
-      <v-card-actions>
-        <span class="ma-3px" id="back">
-          <v-icon dark left color="blue">mdi-chevron-left</v-icon>Back</span
-        >
-      </v-card-actions>
       <v-container grid-list-xs>
         <v-layout row wrap>
           <v-card-text>
@@ -51,8 +50,10 @@
               v-model.lazy="description"
               name="description"
             ></textarea>
-            <label for="attach-name">Attachment</label>
-            <i class="fas fa-cloud-upload-alt" id="fas"></i>
+            <label for="attach-name"
+              >Attachment
+              <i class="fas fa-cloud-upload-alt" id="fas"></i>
+            </label>
           </v-card-text>
         </v-layout>
       </v-container>
@@ -102,27 +103,30 @@ export default {
 <style scoped>
 #fa {
   padding: 5px;
+  height: 35px;
+  top: 223px;
+  left: 173px;
+  border-radius: 4px;
+  color: black;
 }
 #fas {
-  padding: 5px;
+  padding: 1px;
 }
 #contain {
-  margin-left: 70%;
+  margin-left: -20%;
   margin-top: 20px;
+  width: 20px;
   color: white;
-  background-color: rgb(73, 159, 230);
+  background-color: rgb(255, 255, 255);
 }
 #title {
   padding-top: 10px;
-}
-#back {
-  color: rgb(18, 117, 209);
-  margin-inline: 33px;
 }
 label {
   width: 70%;
   height: 40px;
   margin-inline-start: 5%;
+  margin-trim: 30px;
 }
 input {
   border: 1px solid grey;
