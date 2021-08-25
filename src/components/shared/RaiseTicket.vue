@@ -1,26 +1,19 @@
 <template v-slot:add>
-  <v-btn id="contain" v-on="on" @click="onOpen">
-    <i class="fas fa-plus" id="fa"></i> Raise Ticket
+  <v-btn depressed id="contain" v-on="on" @click="onOpen">
+    <i class="fas fa-plus" id="fa"></i>
   </v-btn>
-  <v-dialog v-model="dialog" class="form" v-if="!submitted">
+  <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
     <form ref="form">
-      <v-card
-        my-10
-        id="card"
-        :elevation="hover ? 24 : 3"
-        class="mx-auto"
-        width="600"
-        mb-5
-      >
+      <v-card id="card" :elevation="hover ? 10 : 1" width="450px">
         <v-container grid-list-xs>
           <v-layout row wrap>
             <v-card-text>
-              <h4>New Ticket</h4>
+              <v-card-title primary-title class="justify-center" id="title">
+                New Ticket
+              </v-card-title>
               <label for="subject">Subject*</label>
               <input
                 type="text"
-                class="mdc-text-field__input"
-                aria-labelledby="my-label-id"
                 required
                 v-model.lazy="subject"
                 name="subject"
@@ -30,11 +23,19 @@
               <label for="category"
                 >Category <span class="required">*</span></label
               >
-              <select v-model.lazy="category" v-model="ticket.category">
-                <option value="Bugs">Slow Updates</option>
-                <option value="Display">Slow displays</option>
-                <option value="Blue screen">No displays</option>
-              </select>
+              <input
+                type="text"
+                name="issues"
+                list="issues"
+                autocomplete="off"
+                id="input2"
+              />
+              <datalist id="issues">
+                <option>Slow Updates</option>
+                <option>Blue screen</option>
+                <option>Bugs</option>
+              </datalist>
+
               <label for="textarea">Description*</label>
               <textarea
                 type="textarea"
@@ -53,22 +54,23 @@
               <v-card-actions class="submit">
                 <v-spacer></v-spacer>
                 <v-btn
-                  flat
                   elevation="1"
-                  id="btn"
+                  variant="outlined"
                   text
-                  color="blue"
                   class="mb-5"
                   @click="dialog = false"
+                  rounded="pill"
+                  text-center
+                  id="buton"
                   >Cancel</v-btn
                 >
                 <v-btn
                   flat
                   elevation="1"
-                  color="primary"
                   class="mb-5"
                   @click="sendTicket"
-                  text-color="white"
+                  rounded="pill"
+                  id="btn"
                   >Send</v-btn
                 >
               </v-card-actions>
@@ -163,19 +165,26 @@ export default {
 <style scoped>
 #fa {
   padding: 5px;
+  height: 35px;
+  top: 223px;
+  left: 173px;
+  border-radius: 4px;
+  color: black;
 }
 #fas {
   padding: 5px;
 }
 #contain {
-  margin-left: 70%;
-
+  margin-left: -20%;
+  width: 20px;
   margin-top: 20px;
   color: white;
-  background-color: rgb(73, 159, 230);
+  background-color: rgb(255, 255, 255);
+  padding-left: -20px;
 }
 #title {
   padding-top: 10px;
+  color: black;
 }
 
 h4 {
@@ -191,10 +200,26 @@ h4 {
 }
 label {
   width: 70%;
-
   height: 40px;
   margin-inline-start: 5%;
 }
+/* input { */
+/* border: 1px solid grey;
+  border-radius: 3px;
+  width: 90%; */
+/* height: 30px; */
+/* margin-bottom: 10px;
+  margin-inline-start: 5%; */
+/* } */
+/* input[type="text"] {
+  padding: 20px 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 20px;
+} */
+/* input[type="text"]:focus {
+  background-color: lightblue;
+} */
 input {
   border: 1px solid grey;
   border-radius: 3px;
@@ -203,82 +228,50 @@ input {
   margin-bottom: 20px;
   margin-inline-start: 5%;
 }
-select {
-  border: 1px solid grey;
-  border-radius: 3px;
-  width: 90%;
-  height: 30px;
-  margin-bottom: 20px;
-  margin-inline-start: 5%;
-}
-textarea {
+
+textarea[type="textarea"] {
+  padding: 1rem 10px;
+  font-size: 16px;
   border: 1px solid grey;
   border-radius: 3px;
   width: 90%;
   height: 50px;
   margin-inline-start: 5%;
-
-  height: 10px;
-  margin-inline-start: 5%;
   font-weight: bold;
-  color: black;
-  font-size: 18px;
-  padding: 5px;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: capitalize;
-}
-input {
-  border: 1.5px solid grey;
-  border-radius: 4px;
-  width: 90%;
-  height: 30px;
-  margin-bottom: 10px;
-  margin-inline-start: 5%;
-}
-input[type="text"] {
-  padding: 20px 10px;
-  box-sizing: border-box;
-
-  font-size: 16px;
-}
-input[type="text"]:focus {
-  background-color: lightblue;
-}
-
-textarea[type="textarea"] {
-  padding: 1rem 10px;
-  height: 13vh;
-  font-size: 16px;
-  box-sizing: border-box;
+  resize: none;
+  /* box-sizing: border-box; */
 }
 textarea[type="textarea"]:focus {
-  background-color: lightblue;
+  background-color: rgb(202, 232, 241);
 }
 select {
-  border: 1.5px solid grey;
+  border: 1px solid grey;
   border-radius: 4px;
   width: 90%;
   margin-bottom: 10px;
   margin-inline-start: 5%;
   padding: 12px 8px;
   border-radius: 4px;
+  height: 30px;
 }
-textarea {
-  border: 1.5px solid grey;
-  border-radius: 4px;
-  width: 90%;
-  height: 50px;
-  margin-inline-start: 5%;
-  resize: none;
-}
-
 .submit {
   margin-right: 3.5em;
   top: 10vh;
 }
 #btn {
-  margin-right: 1.5em;
+  /* margin-right: 1.5em; */
+  margin-bottom: 10px;
+  margin-right: -1%;
+  width: 130px;
+  background-color: rgb(1, 26, 80);
+  color: white;
+}
+#buton {
+  width: 100px;
 }
 #card {
   background-color: #f1f1f1;

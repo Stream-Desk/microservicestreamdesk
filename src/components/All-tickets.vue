@@ -1,7 +1,7 @@
-<template>
+<template v-slot:tickets>
   <v-container class="dashboard">
     <v-card elevation="2">
-      <div class="allTicket">All Tickets</div>
+      <!-- <div class="allTicket">All Tickets</div> -->
 
       <table hover table-striped class="table">
         <thead>
@@ -171,7 +171,7 @@ export default {
 <style>
 table {
   width: 100%;
-  border-top: 2px solid rgb(138, 138, 138);
+  border: 1px solid rgb(199, 199, 199);
   background: rgb(255, 254, 254);
 }
 
@@ -182,8 +182,8 @@ td {
 }
 
 th {
-  background-color: rgb(113, 199, 248);
-  color: white;
+  background-color: rgb(253, 254, 255);
+  color: rgb(0, 0, 0);
   padding: 2px;
   text-align: center;
 }
@@ -215,7 +215,6 @@ tr:hover .hover {
 }
 .allTicket {
   padding-left: 10px;
-
   text-transform: capitalize;
   letter-spacing: 0.6em;
   font-size: 1em;

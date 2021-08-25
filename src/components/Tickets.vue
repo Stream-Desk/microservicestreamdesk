@@ -1,13 +1,8 @@
- <template >
+<template>
   <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="500">
     <v-card-title primary-title class="justify-center" id="title">
       Edit Ticket
     </v-card-title>
-    <v-card-actions>
-      <span class="ma-3px" id="back">
-        <v-icon dark left color="blue">mdi-chevron-left</v-icon>Back</span
-      >
-    </v-card-actions>
     <v-container grid-list-xs>
       <v-layout row wrap>
         <v-card-text>
@@ -47,6 +42,9 @@
     </v-container>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <save-to-draft>
+        <slot></slot>
+      </save-to-draft>
 
       <sent-ticket-pop>
         <slot></slot>
@@ -57,16 +55,22 @@
 
 <script>
 import SentTicketPop from "./SendTicketPopUp.vue";
+// import SaveToDraft from "../SaveToDraft.vue";
 import AllTicketsDataService from "../service/All-ticketDataservices";
 
 export default {
   name: "EditTicketPopup",
 
   components: {
+    // SaveToDraft: SaveToDraft,
     SentTicketPop: SentTicketPop,
   },
   data() {
     return {
+      // dialog: false,
+      // subject: "",
+      // category: "",
+      // description: "",
       currentTicket: null,
       message: "",
     };

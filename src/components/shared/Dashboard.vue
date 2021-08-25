@@ -5,35 +5,54 @@
     scroll-target="#scrolling-techniques"
     flat
   >
-    <div id="title">
-      <v-app-bar-title class="text-uppercase">StreamDesk </v-app-bar-title>
-    </div>
+    <v-card flat id="cardtitle">
+      <v-card-title primary-title class="text-uppercase" id="texts">
+        Stream|<span id="spantext">Desk</span>
+      </v-card-title>
+    </v-card>
     <v-row id="tabs" align="center">
-      <v-router to="" text id="draft">Drafts</v-router>
-      <v-router to="" text id="comment">Comments</v-router>
+      <v-card-text id="word"> Tickets </v-card-text>
+      <v-card-text id="word"> Drafts </v-card-text>
     </v-row>
     <v-spacer></v-spacer>
     <v-btn icon id="fa"><i class="fas fa-bell"></i></v-btn>
+    <v-btn icon id="fa"><i class="fas fa-user"></i></v-btn>
   </v-app-bar>
+  <v-system-bar color="primary" window id="system"> </v-system-bar>
   <v-container grid-list-xs>
     <v-card>
-      <div id="raise">
-        <div class="btn">
-          <raise-ticket>
-            <slot></slot>
-          </raise-ticket>
+      <v-row>
+        <div id="raise">
+          <div class="btn">
+            <refresh-ticket>
+              <slot></slot>
+            </refresh-ticket>
+          </div>
+          <div class="btn">
+            <raise-ticket>
+              <slot></slot>
+            </raise-ticket>
+          </div>
+          <div class="btn">
+            <edit-ticket>
+              <slot></slot>
+            </edit-ticket>
+          </div>
+          <div class="btn">
+            <view-ticket>
+              <slot></slot>
+            </view-ticket>
+          </div>
+          <div class="btn">
+            <delete>
+              <slot></slot>
+            </delete>
+          </div>
         </div>
-        <div class="btn">
-          <edit-ticket>
-            <slot></slot>
-          </edit-ticket>
-        </div>
-        <div class="btn">
-          <view-ticket>
-            <slot></slot>
-          </view-ticket>
-        </div>
-      </div>
+        <all-tickets>
+          <slot></slot>
+        </all-tickets>
+      </v-row>
     </v-card>
   </v-container>
 </template>
@@ -42,6 +61,11 @@
 import RaiseTicket from "../shared/RaiseTicket.vue";
 import EditTicket from "../shared/EditTicketPopup.vue";
 import ViewTicket from "../shared/ViewDialog.vue";
+import Delete from "../shared/Delete.vue";
+import RefreshTicket from "../shared/RefreshTicket.vue";
+import AllTickets from "../All-tickets.vue";
+// import TicketDraft from "../shared/TicketDraft.vue";
+
 // import DraftTable from "../shared/DraftTable.vue";
 
 export default {
@@ -50,11 +74,17 @@ export default {
     RaiseTicket: RaiseTicket,
     EditTicket: EditTicket,
     ViewTicket: ViewTicket,
+    Delete: Delete,
+    RefreshTicket: RefreshTicket,
+    AllTickets: AllTickets,
+
+    // TicketDraft: TicketDraft,
   },
   data() {
     return {
       drawer: false,
       group: null,
+      links: [{ text: "Dashboard", route: "/Drafts" }],
     };
   },
   watch: {
@@ -66,10 +96,29 @@ export default {
 </script>
 
 <style scoped>
-#title {
-  color: rgb(7, 36, 163);
-  font-family: "Segoe UI", Roboto, Oxygen, "Open Sans", "Helvetica Neue",
-    sans-serif;
+#cardtitle {
+  position: absolute;
+  width: 300px;
+  height: 110px;
+  left: 0px;
+  top: 0px;
+  background-color: #404040;
+}
+#texts {
+  width: 317px;
+  height: 56px;
+  top: 5px;
+  left: 52px;
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  line-height: 56.25px;
+  position: absolute;
+  color: #f8e220;
+}
+#spantext {
+  color: #ffffff;
 }
 #card {
   position: relative;
@@ -90,8 +139,7 @@ export default {
 #raise {
   display: flex;
   justify-content: flex-start;
-  margin-inline-start: 5%;
-  margin-top: -15px;
+  margin-inline-start: 0.5%;
 }
 .btn {
   margin: 5px;
@@ -100,9 +148,17 @@ export default {
   margin-right: 30px;
 }
 #tabs {
-  margin-inline-start: 5%;
-  color: #f6f8fa;
-  font-size: 15px;
+  margin-inline-start: 28%;
+  color: black;
+  width: 170px;
+  height: 105px;
+  top: 0px;
+  font-style: normal;
+}
+#word {
+  font-weight: 100;
+  font-size: 20px;
+  left: 400px;
 }
 #draft {
   padding-right: 25px;
@@ -113,6 +169,9 @@ export default {
 #app-bar {
   font-family: Poppins, sans-serif;
   font-weight: 400px;
-  background-color: rgb(113, 199, 248);
+  background-color: #f8e220;
+}
+#system {
+  background-color: #f2f1f1;
 }
 </style>
