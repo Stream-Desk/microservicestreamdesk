@@ -3,7 +3,7 @@
     >{{ status }}
     <i v-if="loading" class="fa fa-spinner fa-spin icon-resize-small"></i>
   </a>
-  <span v-else :class="getClass">{{ status }}</span>
+  <span v-else :class="getClass">{{ status }} </span>
 </template>
 <script>
 import axios from "axios";
@@ -44,3 +44,5 @@ export default {
   props: ["value", "toggleUrl"],
 };
 </script>
+
+<style scoped></style>
