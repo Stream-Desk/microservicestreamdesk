@@ -1,8 +1,6 @@
 <template>
   <v-container class="dashboard">
     <v-card elevation="2">
-      <div class="allTicket">All Tickets</div>
-
       <table hover table-striped class="table">
         <thead>
           <tr>
@@ -32,7 +30,7 @@
 -->
 
             <div class="hover">
-              <i @click="editTickets(ticket.id)" class="far fa-edit"></i>
+              <i @click="viewTicket(ticket.id)" class="fas fa-eye"></i>
 
               <i @click="deleteTickets(ticket.id)" class="fas fa-trash">
                 <v-dialog
@@ -182,31 +180,32 @@ td {
 }
 
 th {
-  background-color: rgb(113, 199, 248);
-  color: white;
+  background-color: rgb(229, 229, 230);
+  color: rgb(41, 41, 41);
   padding: 2px;
   text-align: center;
 }
 
 tr:hover {
   background-color: #f9f9f9;
-  color: black;
+  color: rgb(68, 68, 68);
   cursor: pointer;
 }
 tr .hover {
   position: absolute;
   right: 4px;
-  font-size: 30px;
+  font-size: 15px;
   text-decoration: none;
   /* padding: 5px; */
   margin-bottom: 14px;
-  color: black;
+  color: rgb(63, 63, 63);
   display: none;
-  height: 30px;
+  height: 15px;
 }
 i {
-  padding: 15px;
+  padding: 5px;
 }
+
 tr:hover .hover {
   display: inline-block;
   background-color: #f9f9f9;
