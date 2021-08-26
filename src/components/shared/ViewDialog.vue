@@ -7,26 +7,26 @@
       <v-card-title primary-title class="modal-header">
         View Ticket
       </v-card-title>
-      <v-card-text>
+      <v-card-text v-if="currentTicket">
         <v-system-bar color="primary" id="systembar">
           <div>
-            <v-card-text> Ticket -4556 <span>Bugs</span> </v-card-text>
+            <v-card-text v-model="currentTicket.summary">
+              Ticket -4556 <span>Bugs</span>
+            </v-card-text>
           </div>
           <v-card-text> Status: <span id="spanopen">Open</span> </v-card-text>
           <v-spacer></v-spacer>
         </v-system-bar>
         <div class="grid-container" style="grid-auto-flow: column">
-          <div class="item1">Bank:</div>
-          <div class="item2">Subject:</div>
-          <div class="item3">Category:</div>
-          <div class="item4">Date:</div>
+          <div class="item2">Summary:{{ ticket.summary }}</div>
+          <div class="item3">Category:{{ ticket.category }}</div>
+          <div class="item4">Date:{{ ticket.submitDate }}</div>
         </div>
         <div class="grid-container" style="grid-auto-flow: column">
-          <div class="item1">Description:</div>
+          <div class="item1">Description:{{ ticket.description }}</div>
           <div class="item2">Attachment</div>
         </div>
       </v-card-text>
-
       <v-divider></v-divider>
 
       <v-card-actions>
@@ -47,15 +47,28 @@
 </template>
 
 <script>
+import AllTicketsDataService from "../../service/All-ticketDataservices";
 export default {
+  name: "viewDialog",
   data() {
     return {
+      currentTicket: null,
       dialog: false,
     };
   },
   methods: {
     onOpen() {
       this.dialog = true;
+    },
+    getTicket(id) {
+      AllTicketsDataService.get(id)
+        .then((response) => {
+          this.currentTicket = response.data;
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
   },
 };

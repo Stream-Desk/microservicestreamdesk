@@ -3,7 +3,7 @@
     <v-card elevation="2">
       <!-- <div class="allTicket">All Tickets</div> -->
 
-      <table hover table-striped class="table">
+      <table hover table-striped class="table table-bordered">
         <thead>
           <tr>
             <th
@@ -77,20 +77,13 @@ export default {
       ticketTable: {
         tableHeadings: [
           ticketLabels.id,
+          ticketLabels.date,
           ticketLabels.summary,
           ticketLabels.category,
-          ticketLabels.descripton,
-          ticketLabels.date,
+
           ticketLabels.status,
         ],
-        fields: [
-          "$.id",
-          "$.summary",
-          "$.category",
-          "$.description",
-          "$.submitDate",
-          "$.status",
-        ],
+        fields: ["$.id", "$.submitDate", "$.summary", "$.category", "$.status"],
       },
       dialog: false,
     };

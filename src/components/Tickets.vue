@@ -3,7 +3,7 @@
     <v-card-title primary-title class="justify-center" id="title">
       Edit Ticket
     </v-card-title>
-    <v-container grid-list-xs>
+    <v-container grid-list-xs v-if="!updated">
       <v-layout row wrap>
         <v-card-text>
           <div v-if="currentTicket">
@@ -20,10 +20,10 @@
             <label for="category"
               >Category <span class="required">*</span></label
             >
-            <select v-model="currentTicket.category">
-              <option value="Bugs">Slow Updates</option>
-              <option value="Display">Slow displays</option>
-              <option value="Blue screen">No displays</option>
+            <select class="form-control" @change="changeTicket($event)">
+              <option>Slow Display</option>
+              <option>File download</option>
+              <option>Login</option>
             </select>
             <label for="textarea">Description</label>
             <textarea
@@ -46,15 +46,19 @@
         <slot></slot>
       </save-to-draft>
 
-      <sent-ticket-pop @click="updateTicket">
+      <v-btn small elevation="1" color="primary" @click="updateTicket"
+        >Send Ticet</v-btn
+      >
+
+      <!-- <sent-ticket-pop @click="updateTicket">
         <slot></slot>
-      </sent-ticket-pop>
+      </sent-ticket-pop> -->
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import SentTicketPop from "./SendTicketPopUp.vue";
+// import SentTicketPop from "./SendTicketPopUp.vue";
 // import SaveToDraft from "../SaveToDraft.vue";
 import AllTicketsDataService from "../service/All-ticketDataservices";
 
@@ -63,24 +67,34 @@ export default {
 
   components: {
     // SaveToDraft: SaveToDraft,
-    SentTicketPop: SentTicketPop,
+    // SentTicketPop: SentTicketPop,
   },
   data() {
     return {
-      // dialog: false,
-      // subject: "",
-      // category: "",
-      // description: "",
       currentTicket: null,
       message: "",
+
+      categories: [
+        { name: "Product designer", id: 1 },
+        { name: "Full-stack developer", id: 2 },
+        { name: "Product manager", id: 3 },
+        { name: "Senior front-end developer", id: 4 },
+      ],
+      selectedCategory: null,
     };
   },
+  updated: false,
   methods: {
     onSend: function (message) {
       alert(message);
     },
     onClickEditTicket() {
       this.dialog = true;
+    },
+
+    changeTicket(event) {
+      this.changeTicket =
+        event.target.options[event.target.options.selectedIndex].text;
     },
 
     getTicket(id) {
@@ -160,3 +174,9 @@ textarea {
   margin-inline-start: 5%;
 }
 </style>
+
+
+
+
+
+ 
