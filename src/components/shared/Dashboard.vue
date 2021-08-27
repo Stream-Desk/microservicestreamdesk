@@ -20,65 +20,26 @@
   </v-app-bar>
   <v-system-bar color="primary" window id="system"> </v-system-bar>
   <v-container grid-list-xs>
-    <v-card>
-      <v-row>
-        <div id="raise">
-          <div class="btn">
-            <refresh-ticket>
-              <slot></slot>
-            </refresh-ticket>
-          </div>
-          <div class="btn">
-            <raise-ticket>
-              <slot></slot>
-            </raise-ticket>
-          </div>
-          <div class="btn">
-            <edit-ticket>
-              <slot></slot>
-            </edit-ticket>
-          </div>
-          <div class="btn">
-            <view-ticket>
-              <slot></slot>
-            </view-ticket>
-          </div>
-          <div class="btn">
-            <delete>
-              <slot></slot>
-            </delete>
-          </div>
-        </div>
-        <all-tickets>
-          <slot></slot>
-        </all-tickets>
-      </v-row>
-    </v-card>
+    <v-row>
+      <div id="raise"></div>
+      <all-tickets>
+        <slot></slot>
+      </all-tickets>
+      <!-- <raise-ticket>
+        <slot></slot>
+      </raise-ticket> -->
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import RaiseTicket from "../shared/RaiseTicket.vue";
-import EditTicket from "../shared/EditTicketPopup.vue";
-import ViewTicket from "../shared/ViewDialog.vue";
-import Delete from "../shared/Delete.vue";
-import RefreshTicket from "../shared/RefreshTicket.vue";
 import AllTickets from "../All-tickets.vue";
-// import TicketDraft from "../shared/TicketDraft.vue";
-
-// import DraftTable from "../shared/DraftTable.vue";
-
+// import RaiseTicket from "../shared/RaiseTicket.vue";
 export default {
   name: "dashboard",
   components: {
-    RaiseTicket: RaiseTicket,
-    EditTicket: EditTicket,
-    ViewTicket: ViewTicket,
-    Delete: Delete,
-    RefreshTicket: RefreshTicket,
     AllTickets: AllTickets,
-
-    // TicketDraft: TicketDraft,
+    // RaiseTicket: RaiseTicket,
   },
   data() {
     return {

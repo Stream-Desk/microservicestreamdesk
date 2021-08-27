@@ -2,6 +2,24 @@
   <v-container class="dashboard">
     <v-card elevation="2">
       <!-- <div class="allTicket">All Tickets</div> -->
+      <div>
+        <raise-ticket>
+          <slot></slot>
+        </raise-ticket>
+      </div>
+      <v-btn
+        depressed
+        variant="outlined"
+        id="contain"
+        v-on="on"
+        @click="onOpen"
+      >
+        <i class="fas fa-refresh" id="fa"></i>
+      </v-btn>
+      <!-- 
+      <raise-ticket>
+        <slot></slot>
+      </raise-ticket> -->
 
       <table hover table-striped class="table table-bordered">
         <thead>
@@ -11,6 +29,8 @@
               :key="index"
             >
               {{ header }}
+              <br />
+              <span class="material-icons" id="filters"> filter_alt </span>
             </th>
           </tr>
         </thead>
@@ -61,12 +81,14 @@ import status from "../components/Status.vue";
 import { ticketLabels } from "../utils/constants";
 import { xpath_getter } from "../utils/jasonHelpers";
 import ViewTicket from "./Tickets.vue";
+import RaiseTicket from "../components/shared/RaiseTicket.vue";
 export default {
   name: "AllTicket",
 
   component: {
     status,
     ViewTicket,
+    RaiseTicket: RaiseTicket,
   },
   data() {
     return {
@@ -170,14 +192,14 @@ table {
 
 td {
   text-align: left;
-  padding: 2px;
+  padding: 1px;
   border-bottom: 1px solid #ddd;
 }
 
 th {
   background-color: rgb(253, 254, 255);
   color: rgb(0, 0, 0);
-  padding: 2px;
+  padding: 1px;
   text-align: center;
 }
 
@@ -191,14 +213,14 @@ tr .hover {
   right: 4px;
   font-size: 30px;
   text-decoration: none;
-  /* padding: 5px; */
+  padding: 2px;
   margin-bottom: 14px;
   color: black;
   display: none;
   height: 30px;
 }
 i {
-  padding: 15px;
+  padding: 10px;
 }
 tr:hover .hover {
   display: inline-block;
@@ -207,10 +229,30 @@ tr:hover .hover {
   margin-bottom: 16px;
 }
 .allTicket {
-  padding-left: 10px;
+  /* padding-left: 5px; */
   text-transform: capitalize;
   letter-spacing: 0.6em;
   font-size: 1em;
   color: rgba(#fff, 0.35);
+}
+#fa {
+  padding: 5px;
+  height: 35px;
+  top: 223px;
+  left: 150px;
+  color: rgb(0, 0, 0);
+}
+#contain {
+  margin-left: 2%;
+  width: 10px;
+  margin-top: 5px;
+  color: white;
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+}
+#filters {
+  border: 1px solid rgb(219, 217, 217);
+  padding-left: 50px;
+  border-radius: 3px;
 }
 </style>

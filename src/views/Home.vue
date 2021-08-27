@@ -4,7 +4,6 @@
     <div class="navigation-bar">
       <v-icon>mdi-bars</v-icon>
     </div>
-    <RaiseTicket />
 
     <all-tickets></all-tickets>
   </div>
@@ -13,13 +12,10 @@
 <script>
 import AllTickets from "../components/All-tickets.vue";
 
-// import RaiseTicket from "../components/shared/RaiseTicket.vue";
-
 export default {
   name: "Home",
 
   component: {
-    // RaiseTicket,
     AllTickets,
   },
 };
