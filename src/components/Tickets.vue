@@ -1,9 +1,9 @@
-<template>
+<template v-slot:edit>
   <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="500">
     <v-card-title primary-title class="justify-center" id="title">
       Edit Ticket
     </v-card-title>
-    <v-container grid-list-xs v-if="!updated">
+    <v-container grid-list-xs>
       <v-layout row wrap>
         <v-card-text>
           <div v-if="currentTicket">
@@ -42,7 +42,7 @@
     </v-container>
     <v-card-actions>
       <v-btn small elevation="1" color="primary" @click="updateTicket"
-        >Send Ticet</v-btn
+        >Send Ticket</v-btn
       >
     </v-card-actions>
   </v-card>
@@ -147,9 +147,3 @@ textarea {
   margin-inline-start: 5%;
 }
 </style>
-
-
-
-
-
- 

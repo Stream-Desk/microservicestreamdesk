@@ -4,60 +4,69 @@
   </v-btn>
   <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
     <form ref="form">
-      <v-card id="card" :elevation="hover ? 10 : 1" width="450px">
+      <v-card id="card" :elevation="hover ? 10 : 1" width="700px">
         <v-container grid-list-xs>
           <v-layout row wrap>
             <v-card-text>
-              <v-card-title primary-title class="justify-center" id="title">
-                New Ticket
-              </v-card-title>
-              <label for="subject">Summary*</label>
-              <input
-                type="text"
-                required
-                v-model.lazy="subject"
-                name="subject"
-                outlined
-                v-model="ticket.summary"
-              />
-
-              <label for="category"
-                >Category <span class="required">*</span></label
-              >
-
-              <select id="issues" v-model="ticket.category">
-                <option>Slow Updates</option>
-                <option>Blue screen</option>
-                <option>Bugs</option>
-              </select>
-
-              <label for="textarea">Description*</label>
-              <textarea
-                type="textarea"
-                class="mdc-text-field__input"
-                aria-label="Label"
-                required
-                v-model.lazy="description"
-                name="description"
-                v-model="ticket.description"
-              ></textarea>
-              <label
-                >Attachment <i class="fas fa-cloud-upload-alt" id="fas"></i
-              ></label>
-              <div v-if="currentFile" class="progress">
-                <div
-                  class="progress-bar progress-bar-info progress-bar-striped"
-                  role="progressbar"
-                  :aria-valuenow="progress"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="{ width: progress + '%' }"
-                >
-                  {{ progress }}%
-                </div>
-              </div>
-              <input style="none" type="file" ref="file" @change="selectFile" />
-
+              <v-card-title primary-title id="title"> New Ticket </v-card-title>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="input-none" id="label-none">Summary</label>
+                </v-col>
+                <v-col sm="9">
+                  <input
+                    id="input-none"
+                    :state="null"
+                    type="text"
+                    v-model.lazy="summary"
+                    outlined
+                    v-model="ticket.summary"
+                  />
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="input-none" id="label-none">Category</label>
+                </v-col>
+                <v-col sm="9">
+                  <input
+                    id="input-none"
+                    :state="null"
+                    type="text"
+                    name="issues"
+                    list="issues"
+                    autocomplete="off"
+                  />
+                  <datalist id="issues">
+                    <option>Slow Updates</option>
+                    <option>Blue screen</option>
+                    <option>Bugs</option>
+                  </datalist>
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="textarea" id="label-non">Description </label>
+                </v-col>
+                <v-col sm="9">
+                  <textarea
+                    debounce="500"
+                    rows="3"
+                    max-rows="5"
+                    type="textarea"
+                    name="description"
+                    v-model="ticket.description"
+                  ></textarea>
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label id="label-none">Attachment </label>
+                </v-col>
+                <v-col sm="9">
+                  <input type="file" ref="file" @change="selectFile" />
+                </v-col>
+              </v-row>
               <v-card-actions class="submit">
                 <v-spacer></v-spacer>
                 <v-btn
@@ -179,7 +188,7 @@ export default {
   padding: 5px;
   height: 35px;
   top: 223px;
-  left: 173px;
+  /* left: 173px; */
   border-radius: 4px;
   color: black;
 }
@@ -198,64 +207,66 @@ export default {
   padding-top: 10px;
   color: black;
 }
-
 h4 {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-
 #back {
   color: rgb(18, 117, 209);
   margin-inline: 33px;
 }
-label {
-  width: 70%;
-  height: 40px;
+#label-none {
   margin-inline-start: 5%;
+  margin-bottom: 10%;
 }
-/* input { */
-/* border: 1px solid grey;
-  border-radius: 3px;
-  width: 90%; */
-/* height: 30px; */
-/* margin-bottom: 10px;
-  margin-inline-start: 5%; */
-/* } */
-/* input[type="text"] {
-  padding: 20px 10px;
-  box-sizing: border-box;
-  font-size: 15px;
-  height: 20px;
-} */
-/* input[type="text"]:focus {
-  background-color: lightblue;
-} */
+#label-non {
+  margin-inline-start: 2%;
+}
+.submit {
+  margin-right: 3.5em;
+  top: 10vh;
+}
+#btn {
+  /* margin-right: 1.5em; */
+  margin-bottom: 10px;
+  margin-left: 54%;
+  width: 130px;
+  background-color: rgb(1, 26, 80);
+  color: white;
+}
+#buton {
+  width: 100px;
+  margin-left: 70%;
+  margin-right: -30px;
+}
+#card {
+  background-color: #f1f1f1;
+}
+#input-none {
+  width: 198%;
+}
 input {
   border: 1px solid grey;
   border-radius: 3px;
-  width: 90%;
+  width: 198%;
   height: 30px;
   margin-bottom: 20px;
-  margin-inline-start: 5%;
 }
-
 textarea[type="textarea"] {
-  padding: 1rem 10px;
   font-size: 16px;
   border: 1px solid grey;
   border-radius: 3px;
-  width: 90%;
-  height: 50px;
-  margin-inline-start: 5%;
+  width: 198%;
+  height: 110px;
   font-weight: bold;
   color: rgb(0, 0, 0);
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: capitalize;
   resize: none;
-  /* box-sizing: border-box; */
+  /* margin-left: 11%; */
 }
 textarea[type="textarea"]:focus {
   background-color: rgb(202, 232, 241);
@@ -269,23 +280,5 @@ select {
   padding: 12px 8px;
   border-radius: 4px;
   height: 30px;
-}
-.submit {
-  margin-right: 3.5em;
-  top: 10vh;
-}
-#btn {
-  /* margin-right: 1.5em; */
-  margin-bottom: 10px;
-  margin-right: -1%;
-  width: 130px;
-  background-color: rgb(1, 26, 80);
-  color: white;
-}
-#buton {
-  width: 100px;
-}
-#card {
-  background-color: #f1f1f1;
 }
 </style>
