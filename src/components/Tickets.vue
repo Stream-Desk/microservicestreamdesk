@@ -20,7 +20,7 @@
             <label for="category"
               >Category <span class="required">*</span></label
             >
-            <select class="form-control" @change="changeTicket($event)">
+            <select class="form-control" v-model="currentTicket.category">
               <option>Slow Display</option>
               <option>File download</option>
               <option>Login</option>
@@ -41,46 +41,24 @@
       </v-layout>
     </v-container>
     <v-card-actions>
-      <v-spacer></v-spacer>
-      <save-to-draft>
-        <slot></slot>
-      </save-to-draft>
-
       <v-btn small elevation="1" color="primary" @click="updateTicket"
         >Send Ticet</v-btn
       >
-
-      <!-- <sent-ticket-pop @click="updateTicket">
-        <slot></slot>
-      </sent-ticket-pop> -->
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-// import SentTicketPop from "./SendTicketPopUp.vue";
-// import SaveToDraft from "../SaveToDraft.vue";
 import AllTicketsDataService from "../service/All-ticketDataservices";
 
 export default {
   name: "EditTicketPopup",
 
-  components: {
-    // SaveToDraft: SaveToDraft,
-    // SentTicketPop: SentTicketPop,
-  },
+  components: {},
   data() {
     return {
       currentTicket: null,
       message: "",
-
-      categories: [
-        { name: "Product designer", id: 1 },
-        { name: "Full-stack developer", id: 2 },
-        { name: "Product manager", id: 3 },
-        { name: "Senior front-end developer", id: 4 },
-      ],
-      selectedCategory: null,
     };
   },
   updated: false,
@@ -90,11 +68,6 @@ export default {
     },
     onClickEditTicket() {
       this.dialog = true;
-    },
-
-    changeTicket(event) {
-      this.changeTicket =
-        event.target.options[event.target.options.selectedIndex].text;
     },
 
     getTicket(id) {

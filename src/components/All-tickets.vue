@@ -1,8 +1,6 @@
 <template v-slot:tickets>
   <v-container class="dashboard">
     <v-card elevation="2">
-      <!-- <div class="allTicket">All Tickets</div> -->
-
       <table hover table-striped class="table table-bordered">
         <thead>
           <tr>
@@ -24,14 +22,10 @@
               <view-ticket :tickets="ticket"></view-ticket>
             </td>
 
-            <!-- <td>
-              <label class="form-checkbox">
-                <input type="checkbox" :value="ticket.id" v-model="selected" />
-                <i class="form-icon"></i>
-              </label>
--->
-
             <div class="hover">
+              <v-btn color="success" @click="viewTicket(ticket.id)"
+                >Details</v-btn
+              >
               <i @click="editTickets(ticket.id)" class="far fa-edit"></i>
 
               <i @click="deleteTickets(ticket.id)" class="fas fa-trash">
@@ -114,7 +108,7 @@ export default {
         .then((response) => {
           this.tickets = response.data;
           this.tickets.map((ticket) => {
-            ticket.description = this.getDisplayTicket(ticket.description);
+            ticket.summary = this.getDisplayTicket(ticket.summary);
           });
 
           console.log(response.data);
@@ -126,6 +120,9 @@ export default {
 
     refreshList() {
       this.retrieveTickets();
+    },
+    viewTicket(id) {
+      this.$router.push({ name: "viewTicketDetail", params: { id: id } });
     },
 
     editTickets(id) {
@@ -142,14 +139,7 @@ export default {
         });
     },
 
-    getDisplayTicket(description) {
-      description =
-        description.length > 20
-          ? description.substr(0, 20) + "..."
-          : description;
-      return description;
-    },
-    getDisplaySummary(summary) {
+    getDisplayTicket(summary) {
       summary = summary.length > 20 ? summary.substr(0, 20) + "..." : summary;
       return summary;
     },

@@ -30,6 +30,23 @@ class AllTicketsDataService {
     // findByDate(date) {
     //     return http.get(`/tickets?date=${date}`);
     // }
+
+    upload(file, onUploadProgress) {
+        let formData = new FormData();
+
+        formData.append("file", file);
+
+        return http.post("/api/Tickets/Upload", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress
+        });
+    }
+
+    getFiles() {
+        return http.get("/api/Tickets/Download");
+    }
 }
 
 export default new AllTicketsDataService();

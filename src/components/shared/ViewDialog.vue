@@ -7,24 +7,53 @@
       <v-card-title primary-title class="modal-header">
         View Ticket
       </v-card-title>
-      <v-card-text v-if="currentTicket">
+      <v-card-text>
         <v-system-bar color="primary" id="systembar">
           <div>
-            <v-card-text v-model="currentTicket.summary">
-              Ticket -4556 <span>Bugs</span>
-            </v-card-text>
+            <v-card-text> Ticket -4556 <span>Bugs</span> </v-card-text>
           </div>
           <v-card-text> Status: <span id="spanopen">Open</span> </v-card-text>
           <v-spacer></v-spacer>
         </v-system-bar>
-        <div class="grid-container" style="grid-auto-flow: column">
-          <div class="item2">Summary:{{ ticket.summary }}</div>
-          <div class="item3">Category:{{ ticket.category }}</div>
-          <div class="item4">Date:{{ ticket.submitDate }}</div>
-        </div>
-        <div class="grid-container" style="grid-auto-flow: column">
-          <div class="item1">Description:{{ ticket.description }}</div>
-          <div class="item2">Attachment</div>
+        <div
+          class="grid-container"
+          style="grid-auto-flow: column"
+          v-if="currentTicket"
+        >
+          <label for="subject">Summary</label>
+          <input
+            type="text"
+            required
+            v-model.lazy="subject"
+            name="subject"
+            outlined
+            v-model="currentTicket.summary"
+          />
+
+          <label for="category">Category <span class="required">*</span></label>
+          <input
+            type="text"
+            name="issues"
+            list="issues"
+            autocomplete="off"
+            id="input2"
+          />
+          <datalist id="issues">
+            <option>Slow Updates</option>
+            <option>Blue screen</option>
+            <option>Bugs</option>
+          </datalist>
+
+          <label for="textarea">Description*</label>
+          <textarea
+            type="textarea"
+            class="mdc-text-field__input"
+            aria-label="Label"
+            required
+            v-model.lazy="description"
+            name="description"
+            v-model="currentTicket.description"
+          ></textarea>
         </div>
       </v-card-text>
       <v-divider></v-divider>

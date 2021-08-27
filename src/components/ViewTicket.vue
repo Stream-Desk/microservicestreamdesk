@@ -1,58 +1,144 @@
+
 <template>
-  <v-card max-width="600" height="450" left="350">
-    <h5>Ticket Information</h5>
-    <div v-for="ticket in tickets" :key="ticket.id">
-      <div class="info">
-        <strong><label>Summary</label></strong>
-        <p>{{ tickets.summary }}</p>
-      </div>
-      <div class="info">
-        <strong><label>Category</label></strong>
-        <p>{{ tickets.category }}</p>
-      </div>
-      <div class="info">
-        <strong><label>Description</label></strong>
-        <p>{{ tickets.description }}</p>
-      </div>
-      <div class="info">
-        <strong><label>Atachments</label></strong>
-        <p>hello there</p>
-      </div>
-    </div>
+  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="600">
+    <v-container grid-list-xs>
+      <v-layout row wrap>
+        <v-card-text>
+          <form v-if="currentTicket">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Id:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.id"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Date:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.submitDate"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Category:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.category"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Summary:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.summary"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Description:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.description"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Attachment:</label>
+              <div class="col-sm-10">
+                <input type="text" disabled class="form-control-plaintext" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Status:</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  v-model="currentTicket.status"
+                  disabled
+                  class="form-control-plaintext"
+                />
+              </div>
+            </div>
+          </form>
+        </v-card-text>
+      </v-layout>
+    </v-container>
   </v-card>
 </template>
 
 <script>
+import AllTicketsDataService from "../service/All-ticketDataservices";
+
 export default {
-  // name: "ViewTicket",
-  // data() {
-  //   return {
-  //     currentTicket: null,
-  // };
-  // },
+  name: "ViewTicket",
+
+  components: {},
+  data() {
+    return {
+      currentTicket: null,
+      message: "",
+    };
+  },
+  updated: false,
   methods: {
-    // getTicket(id) {
-    //   AllTicketsDataService.get(id)
-    //     .then((response) => {
-    //       this.currentTicket = response.data;
-    //       console.log(response.data);
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // },
+    onSend: function (message) {
+      alert(message);
+    },
+    onClickEditTicket() {
+      this.dialog = true;
+    },
+
+    getTicket(id) {
+      AllTicketsDataService.get(id)
+        .then((response) => {
+          this.currentTicket = response.data;
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+  },
+  mounted() {
+    this.message = "";
+    this.getTicket(this.$route.params.id);
   },
 };
 </script>
 
-<style>
-.info {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
+<style >
+form input {
+  margin-left: 30px;
 }
-p {
-  margin-left: 10%;
-  padding: 10px;
+form label {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
 }
 </style>
+
+
+
+
+
+ 

@@ -11,7 +11,7 @@
               <v-card-title primary-title class="justify-center" id="title">
                 New Ticket
               </v-card-title>
-              <label for="subject">Subject*</label>
+              <label for="subject">Summary*</label>
               <input
                 type="text"
                 required
@@ -24,18 +24,12 @@
               <label for="category"
                 >Category <span class="required">*</span></label
               >
-              <input
-                type="text"
-                name="issues"
-                list="issues"
-                autocomplete="off"
-                id="input2"
-              />
-              <datalist id="issues">
+
+              <select id="issues" v-model="ticket.category">
                 <option>Slow Updates</option>
                 <option>Blue screen</option>
                 <option>Bugs</option>
-              </datalist>
+              </select>
 
               <label for="textarea">Description*</label>
               <textarea
@@ -50,7 +44,19 @@
               <label
                 >Attachment <i class="fas fa-cloud-upload-alt" id="fas"></i
               ></label>
-              <input type="file" ref="file" @change="selectFile" />
+              <div v-if="currentFile" class="progress">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  :aria-valuenow="progress"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  :style="{ width: progress + '%' }"
+                >
+                  {{ progress }}%
+                </div>
+              </div>
+              <input style="none" type="file" ref="file" @change="selectFile" />
 
               <v-card-actions class="submit">
                 <v-spacer></v-spacer>
@@ -84,7 +90,6 @@
 </template>
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
-import UploadFilesService from "../../service/UploadFilesService";
 
 export default {
   components: {},
@@ -94,12 +99,12 @@ export default {
         summary: "",
         category: "",
         description: "",
-        // selectedFiles: undefined,
-        // currentFile: undefined,
-        // progress: 0,
-        // message: "",
+        selectedFiles: undefined,
+        currentFile: undefined,
+        progress: 0,
+        message: "",
 
-        // fileInfos: [],
+        fileInfos: [],
       },
       submitted: false,
 
@@ -113,6 +118,7 @@ export default {
         summary: this.ticket.summary,
         category: this.ticket.category,
         description: this.ticket.description,
+        // selectedFiles: this.ticket.selectedFiles,
       };
       AllTicketsDataService.create(data)
 
@@ -142,12 +148,12 @@ export default {
     this.progress = 0;
 
     this.currentFile = this.selectedFiles.item(0);
-    UploadFilesService.upload(this.currentFile, (event) => {
+    AllTicketsDataService.upload(this.currentFile, (event) => {
       this.progress = Math.round((100 * event.loaded) / event.total);
     })
       .then((response) => {
         this.message = response.data.message;
-        return UploadFilesService.getFiles();
+        return AllTicketsDataService.getFiles();
       })
       .then((files) => {
         this.fileInfos = files.data;
@@ -159,6 +165,11 @@ export default {
       });
 
     this.selectedFiles = undefined;
+  },
+  mounted() {
+    AllTicketsDataService.getFiles().then((response) => {
+      this.fileInfos = response.data;
+    });
   },
 };
 </script>

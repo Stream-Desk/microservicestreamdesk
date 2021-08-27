@@ -38,11 +38,7 @@
               <slot></slot>
             </edit-ticket>
           </div>
-          <div class="btn">
-            <view-ticket>
-              <slot></slot>
-            </view-ticket>
-          </div>
+          <div class="btn"></div>
           <div class="btn">
             <delete>
               <slot></slot>
@@ -60,7 +56,7 @@
 <script>
 import RaiseTicket from "../shared/RaiseTicket.vue";
 import EditTicket from "../shared/EditTicketPopup.vue";
-import ViewTicket from "../shared/ViewDialog.vue";
+
 import Delete from "../shared/Delete.vue";
 import RefreshTicket from "../shared/RefreshTicket.vue";
 import AllTickets from "../All-tickets.vue";
@@ -73,7 +69,7 @@ export default {
   components: {
     RaiseTicket: RaiseTicket,
     EditTicket: EditTicket,
-    ViewTicket: ViewTicket,
+
     Delete: Delete,
     RefreshTicket: RefreshTicket,
     AllTickets: AllTickets,

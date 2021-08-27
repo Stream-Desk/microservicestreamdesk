@@ -24,6 +24,11 @@ const routes = [
     name: "TicketDraft",
     component: () => import("../components/shared/TicketDraft"),
   },
+  {
+    path: "/ViewTicket",
+    name: "viewTicketDetail",
+    component: () => import("../components/ViewTicket"),
+  },
 ];
 
 const router = createRouter({
