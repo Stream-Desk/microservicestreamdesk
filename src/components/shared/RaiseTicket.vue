@@ -194,7 +194,7 @@ export default {
   width: 20px;
   margin-top: 20px;
   color: white;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(109, 190, 243);
   padding-left: -20px;
 }
 #title {
