@@ -7,15 +7,6 @@
           <slot></slot>
         </raise-ticket>
       </div>
-      <v-btn
-        depressed
-        variant="outlined"
-        id="contain"
-        v-on="on"
-        @click="onOpen"
-      >
-        <i class="fas fa-refresh" id="fa"></i>
-      </v-btn>
       <!-- 
       <raise-ticket>
         <slot></slot>
