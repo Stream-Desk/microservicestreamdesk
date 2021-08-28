@@ -1,5 +1,5 @@
 <template v-slot:add>
-  <v-btn depressed id="contain" v-on="on" @click="onOpen">
+  <v-btn flat depressed id="contain" v-on="on" @click="onOpen">
     <i class="fas fa-plus" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
@@ -191,7 +191,7 @@ export default {
   padding: 5px;
 }
 #contain {
-  margin-left: -20%;
+  margin-left: 20%;
   width: 20px;
   margin-top: 20px;
   color: white;

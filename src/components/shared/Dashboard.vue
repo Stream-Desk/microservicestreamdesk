@@ -21,25 +21,26 @@
   <v-system-bar color="primary" window id="system"> </v-system-bar>
   <v-container grid-list-xs>
     <v-row>
-      <div id="raise"></div>
+      <div id="raise">
+        <raise-ticket>
+          <slot></slot>
+        </raise-ticket>
+      </div>
       <all-tickets>
         <slot></slot>
       </all-tickets>
-      <!-- <raise-ticket>
-        <slot></slot>
-      </raise-ticket> -->
     </v-row>
   </v-container>
 </template>
 
 <script>
 import AllTickets from "../All-tickets.vue";
-// import RaiseTicket from "../shared/RaiseTicket.vue";
+import RaiseTicket from "../shared/RaiseTicket.vue";
 export default {
   name: "dashboard",
   components: {
     AllTickets: AllTickets,
-    // RaiseTicket: RaiseTicket,
+    RaiseTicket: RaiseTicket,
   },
   data() {
     return {
