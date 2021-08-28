@@ -183,7 +183,6 @@ export default {
   padding: 5px;
   height: 35px;
   top: 223px;
-  /* left: 173px; */
   border-radius: 4px;
   color: black;
 }
