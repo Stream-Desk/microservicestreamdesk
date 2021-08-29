@@ -1,50 +1,109 @@
 <template>
-  <v-container grid-list-xs>
-    <v-card :elevation="hover ? 24 : 3" class="mx-auto" width="600">
-      <v-system-bar window color="primary">
-        <span>Issue with Bugs</span>
-        <v-spacer></v-spacer>
-        <v-icon>mdi-minus</v-icon>
-        <v-icon>mdi-close</v-icon>
-      </v-system-bar>
-      <v-card-text>
-        <label for="subject" id="label1"> Subject </label>
-        <input type="text" />
-        <label for="category" id="label2"> Category </label>
-        <input type="text" name="issues" list="issues" autocomplete="off" />
-        <datalist id="issues">
-          <option>Slow Updates</option>
-          <option>Blue screen</option>
-          <option>Bugs</option>
-        </datalist>
-        <label for="description" id="label3"> Decription </label>
-        <textarea type="text" />
-        <label for="attachment" id="label4"> Attachment </label>
-        <i class="fas fa-cloud-upload-alt" id="fas"></i>
-      </v-card-text>
-      <v-system-bar window color="primary">
-        <div>
-          <v-btn color="blue" id="buton" class="fill" @click="onSending">
-            Send</v-btn
-          >
-        </div>
-        <v-divider class="mx-4" vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-divider class="mx-4" vertical></v-divider>
-        <span>Saved</span>
-        <v-icon>mdi-delete</v-icon>
-      </v-system-bar>
-    </v-card>
-  </v-container>
+  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="500">  
+    <v-card-title primary-title class="justify-center" id="title">
+    </v-card-title>
+     <router-link class="icon" to="/Drafts" color="danger"
+      ><i color="red lighten-5" class="fas fa-times"></i
+    ></router-link>
+    <v-container grid-list-xs>
+      <v-layout row wrap>
+        <v-card-text>
+          <div v-if="draftTicket">
+            <label for="subject">Summary</label>
+            <input
+              type="subject"
+              class="mdc-text-field__input"
+              aria-labelledby="my-label-id"
+              required
+              v-model="draftTicket.summary"
+              name="subject"
+              outlined
+            />
+            <label for="category"
+              >Category <span class="required">*</span></label
+            >
+            <select class="form-control" v-model="draftTicket.category">
+              <option>Slow Display</option>
+              <option>File download</option>
+              <option>Login</option>
+            </select>
+            <label for="textarea">Description</label>
+            <textarea
+              type="description"
+              class="mdc-text-field__input"
+              aria-label="Label"
+              required
+              v-model="draftTicket.description"
+              name="description"
+            ></textarea>
+            <label for="attach-name">Attachment</label>
+            <i class="fas fa-cloud-upload-alt" id="fas"></i>
+          </div>
+        </v-card-text>
+      </v-layout>
+    </v-container>
+    <v-card-actions>
+       <v-btn small elevation="1" color="primary" @click="updateDraft"
+        >save</v-btn
+      >
+      <v-btn small elevation="1" color="primary" @click="sendTicket"
+        >Send Ticket</v-btn
+      >
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
+import DraftsDataService from "../../service/DraftTicketService";
+import AllTicketsDataService from "../../service/All-ticketDataservices";
 export default {
   data() {
-    return {};
+    return {
+      draftTicket: null,
+      message: "",
+    };
   },
   methods: {
-    onSending() {},
+     sendTicket() {
+      var data = {
+        summary: this.draftTicket.summary,
+        category: this.draftTicket.category,
+        description: this.draftTicket.description,
+      };
+AllTicketsDataService.create(data)
+        .then((response) => {
+          this.draftTicket.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+     },
+    getDraft(id) {
+      DraftsDataService.get(id)
+        .then((response) => {
+          this.draftTicket = response.data;
+          console.log(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    updateDraft() {
+      DraftsDataService.update(this.draftTicket.id, this.draftTicket)
+        .then((response) => {
+          console.log(response.data);
+          this.message = "Ticket saved!";
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+  },
+  mounted() {
+    this.message = "";
+    this.getDraft(this.$route.params.id);
   },
 };
 </script>
@@ -94,5 +153,43 @@ textarea {
 }
 btn {
   transition: 0.25s;
+}
+#contain {
+  margin-left: 70%;
+  margin-top: 20px;
+  color: white;
+  background-color: rgb(73, 159, 230);
+}
+label {
+  width: 70%;
+  height: 40px;
+  margin-inline-start: 5%;
+}
+input {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 90%;
+  height: 30px;
+  margin-bottom: 20px;
+  margin-inline-start: 5%;
+}
+select {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 90%;
+  height: 30px;
+  margin-bottom: 20px;
+  margin-inline-start: 5%;
+}
+textarea {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 90%;
+  height: 50px;
+  margin-inline-start: 5%;
+}
+.icon {
+  float: left;
+  font-size: 18px;
 }
 </style>

@@ -11,8 +11,8 @@
       </v-card-title>
     </v-card>
     <v-row id="tabs" align="center">
-      <v-card-text id="word"> Tickets </v-card-text>
-      <v-card-text id="word"> Drafts </v-card-text>
+      <router-link class="router" to="/Allticket" exact>Tickets</router-link>
+      <router-link class="router" to="/Drafts">Drafts</router-link>
     </v-row>
     <v-spacer></v-spacer>
     <v-btn icon id="fa"><i class="fas fa-bell"></i></v-btn>
@@ -22,24 +22,22 @@
   <v-container grid-list-xs>
     <v-row>
       <div id="raise"></div>
-      <all-tickets>
+      <!-- <all-tickets>
         <slot></slot>
-      </all-tickets>
-      <!-- <raise-ticket>
+      </all-tickets> -->
+      <raise-ticket>
         <slot></slot>
-      </raise-ticket> -->
+      </raise-ticket>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import AllTickets from "../All-tickets.vue";
-// import RaiseTicket from "../shared/RaiseTicket.vue";
+import RaiseTicket from "../shared/RaiseTicket.vue";
 export default {
   name: "dashboard",
   components: {
-    AllTickets: AllTickets,
-    // RaiseTicket: RaiseTicket,
+    RaiseTicket: RaiseTicket,
   },
   data() {
     return {
@@ -134,5 +132,15 @@ export default {
 }
 #system {
   background-color: #f2f1f1;
+}
+.router {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  padding: 10px 10px;
+}
+a.router-link-exact-active {
+  text-decoration: underline;
+  color: lightgreen;
 }
 </style>

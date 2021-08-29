@@ -32,6 +32,7 @@
               <br />
               <span class="material-icons" id="filters"> filter_alt </span>
             </th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -43,7 +44,11 @@
               {{ getTicketFieldValues(ticket, field) }}
               <view-ticket :tickets="ticket"></view-ticket>
             </td>
-
+            <td>
+              <v-chip class="" small flat>
+                {{ ticket.status }}
+              </v-chip>
+            </td>
             <div class="hover">
               <v-btn color="success" @click="viewTicket(ticket.id)"
                 >Details</v-btn
@@ -73,11 +78,12 @@
 
 <script>
 import AllTicketsDataService from "../service/All-ticketDataservices";
-import status from "../components/Status.vue";
+import status from "./Status.vue";
+
 import { ticketLabels } from "../utils/constants";
 import { xpath_getter } from "../utils/jasonHelpers";
 import ViewTicket from "./Tickets.vue";
-import RaiseTicket from "../components/shared/RaiseTicket.vue";
+import RaiseTicket from "./shared/RaiseTicket.vue";
 export default {
   name: "AllTicket",
 
@@ -88,6 +94,8 @@ export default {
   },
   data() {
     return {
+      status: "",
+      loading: false,
       search: "",
       selected: [],
       selectAll: false,
@@ -98,14 +106,13 @@ export default {
           ticketLabels.date,
           ticketLabels.summary,
           ticketLabels.category,
-
-          ticketLabels.status,
         ],
-        fields: ["$.id", "$.submitDate", "$.summary", "$.category", "$.status"],
+        fields: ["$.id", "$.submitDate", "$.summary", "$.category"],
       },
       dialog: false,
     };
   },
+
   created() {
     this.retrieveTickets();
   },

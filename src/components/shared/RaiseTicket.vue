@@ -74,11 +74,11 @@
                   variant="outlined"
                   text
                   class="mb-5"
-                  @click="dialog = false"
+                  @click="sendTicket"
                   rounded="pill"
                   text-center
                   id="buton"
-                  >Cancel</v-btn
+                  >Save</v-btn
                 >
                 <v-btn
                   flat
@@ -99,7 +99,7 @@
 </template>
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
-
+import DraftsDataService from "../../service/DraftTicketService";
 export default {
   components: {},
   data() {
@@ -127,10 +127,18 @@ export default {
         summary: this.ticket.summary,
         category: this.ticket.category,
         description: this.ticket.description,
-        // selectedFiles: this.ticket.selectedFiles,
       };
-      AllTicketsDataService.create(data)
 
+      AllTicketsDataService.create(data)
+        .then((response) => {
+          this.ticket.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      DraftsDataService.create(data)
         .then((response) => {
           this.ticket.id = response.data.id;
           console.log(response.data);
@@ -140,6 +148,7 @@ export default {
           console.log(e);
         });
     },
+
     newTicket() {
       this.submitted = false;
       this.ticket = {};

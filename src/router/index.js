@@ -1,33 +1,38 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+// import Home from "../views/Home.vue";
+import AllTicket from "../components/AllTicket.vue"
 
-// import AllTickets from '../views/Allticket.vue'
 
 const routes = [
+  // {
+  //   path: "/",
+  //   name: "Home",
+  //   component: Home,
+  // },
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    // path: "/Allticket",
-    // name: "All-tickets",
-    // component: AllTickets,
+    path: "/Allticket",
+    name: "AllTicket",
+    component: AllTicket
   },
   {
     path: "/Allticket/id",
     name: "Ticket-details",
-    component: () => import("../components/Tickets"),
+    component: () => import("../components/Tickets.vue"),
   },
   {
     path: "/Drafts",
     name: "TicketDraft",
-    component: () => import("../components/shared/TicketDraft"),
+    component: () => import("../components/shared/TicketDraft.vue"),
   },
   {
     path: "/ViewTicket",
     name: "viewTicketDetail",
-    component: () => import("../components/ViewTicket"),
+    component: () => import("../components/ViewTicket.vue"),
+  },
+  {
+    path: "/DraftTicket",
+    name: "DraftTicket",
+    component: () => import("../components/shared/DraftTicket.vue"),
   },
 ];
 
