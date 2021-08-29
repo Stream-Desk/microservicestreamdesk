@@ -1,55 +1,91 @@
 <template>
-  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="500">  
-    <v-card-title primary-title class="justify-center" id="title">
-    </v-card-title>
-     <router-link class="icon" to="/Drafts" color="danger"
-      ><i color="red lighten-5" class="fas fa-times"></i
-    ></router-link>
-    <v-container grid-list-xs>
-      <v-layout row wrap>
-        <v-card-text>
-          <div v-if="draftTicket">
-            <label for="subject">Summary</label>
-            <input
-              type="subject"
-              class="mdc-text-field__input"
-              aria-labelledby="my-label-id"
-              required
-              v-model="draftTicket.summary"
-              name="subject"
-              outlined
-            />
-            <label for="category"
-              >Category <span class="required">*</span></label
-            >
-            <select class="form-control" v-model="draftTicket.category">
-              <option>Slow Display</option>
-              <option>File download</option>
-              <option>Login</option>
-            </select>
-            <label for="textarea">Description</label>
-            <textarea
-              type="description"
-              class="mdc-text-field__input"
-              aria-label="Label"
-              required
-              v-model="draftTicket.description"
-              name="description"
-            ></textarea>
-            <label for="attach-name">Attachment</label>
-            <i class="fas fa-cloud-upload-alt" id="fas"></i>
-          </div>
-        </v-card-text>
-      </v-layout>
-    </v-container>
-    <v-card-actions>
-       <v-btn small elevation="1" color="primary" @click="updateDraft"
-        >save</v-btn
-      >
-      <v-btn small elevation="1" color="primary" @click="sendTicket"
-        >Send Ticket</v-btn
-      >
-    </v-card-actions>
+  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="700">  
+   <form ref="form" v-if="draftTicket">
+      <v-card id="card" :elevation="hover ? 10 : 1" width="700px">
+        <v-container grid-list-xs>
+          <router-link to="/Drafts"><i class="fas fa-times"></i></router-link>
+          <v-layout row wrap>
+            <v-card-text>
+              <v-card-title primary-title id="title"> New Ticket </v-card-title>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="input-none" id="label-none">Summary</label>
+                </v-col>
+                <v-col sm="9">
+                  <input
+                    id="input-none"
+                    :state="null"
+                    type="text"
+                    v-model.lazy="summary"
+                    outlined
+                    v-model=" draftTicket.summary"
+                  />
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="input-none" id="label-none">Category</label>
+                </v-col>
+                <v-col sm="9">
+                 
+                  <select id="issues"   v-model=" draftTicket.category">
+                    <option>Slow Updates</option>
+                    <option>Blue screen</option>
+                    <option>Bugs</option>
+                  </select>
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label for="textarea" id="label-non">Description </label>
+                </v-col>
+                <v-col sm="9">
+                  <textarea
+                    debounce="500"
+                    rows="3"
+                    max-rows="5"
+                    type="textarea"
+                    name="description"
+                    v-model=" draftTicket.description"
+                  ></textarea>
+                </v-col>
+              </v-row>
+              <v-row class="my-1">
+                <v-col sm="3">
+                  <label id="label-none">Attachment </label>
+                </v-col>
+                <v-col sm="9">
+                  <input type="file" ref="file" @change="selectFile" />
+                </v-col>
+              </v-row>
+              <v-card-actions class="submit">
+                <v-spacer></v-spacer>
+                <v-btn
+                  elevation="1"
+                  variant="outlined"
+                  text
+                  class="mb-5"
+                  @click="updateDraft"
+                  rounded="pill"
+                  text-center
+                  id="buton"
+                  >Save</v-btn
+                >
+                <v-btn
+                  flat
+                  elevation="1"
+                  class="mb-5"
+                  @click="sendTicket"
+                  rounded="pill"
+                  id="btn"
+                  >Send</v-btn
+                >
+              </v-card-actions>
+            </v-card-text>
+          </v-layout>
+        </v-container>
+      </v-card>
+    </form>
   </v-card>
 </template>
 
@@ -109,87 +145,68 @@ AllTicketsDataService.create(data)
 </script>
 
 <style scoped>
-#label1 {
+#label-none {
   margin-inline-start: 5%;
+  margin-bottom: 10%;
 }
-#label2 {
-  margin-inline-start: 5%;
+#label-non {
+  margin-inline-start: 2%;
 }
-#label3 {
-  margin-inline-start: 5%;
+.submit {
+  margin-right: 3.5em;
+  top: 10vh;
 }
-#label4 {
-  margin-inline-start: 5%;
-}
-input {
-  border: 1px solid grey;
-  border-radius: 3px;
-  width: 90%;
-  height: 30px;
-  margin-bottom: 20px;
-  margin-inline-start: 5%;
-}
-textarea {
-  border: 1px solid grey;
-  border-radius: 3px;
-  width: 90%;
-  height: 50px;
-  margin-inline-start: 5%;
+#btn {
+  /* margin-right: 1.5em; */
+  margin-bottom: 10px;
+  margin-left: 54%;
+  width: 130px;
+  background-color: rgb(1, 26, 80);
+  color: white;
 }
 #buton {
-  width: 50px;
-  height: 30px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  margin-right: 7%;
-  color: white;
-  border-radius: 18px;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-.fill:hover,
-.fill:focus {
-  box-shadow: inset 0 0 0 2em var(--hover);
-}
-btn {
-  transition: 0.25s;
-}
-#contain {
+  width: 100px;
   margin-left: 70%;
-  margin-top: 20px;
-  color: white;
-  background-color: rgb(73, 159, 230);
+  margin-right: -30px;
 }
-label {
-  width: 70%;
-  height: 40px;
-  margin-inline-start: 5%;
+#card {
+  background-color: #f1f1f1;
+}
+#input-none {
+  width: 198%;
 }
 input {
   border: 1px solid grey;
   border-radius: 3px;
-  width: 90%;
+  width: 198%;
   height: 30px;
   margin-bottom: 20px;
-  margin-inline-start: 5%;
+}
+textarea[type="textarea"] {
+  font-size: 16px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 198%;
+  height: 110px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  resize: none;
+  /* margin-left: 11%; */
+}
+textarea[type="textarea"]:focus {
+  background-color: rgb(202, 232, 241);
 }
 select {
   border: 1px solid grey;
-  border-radius: 3px;
+  border-radius: 4px;
   width: 90%;
+  margin-bottom: 10px;
+  margin-inline-start: 5%;
+  padding: 12px 8px;
+  border-radius: 4px;
   height: 30px;
-  margin-bottom: 20px;
-  margin-inline-start: 5%;
-}
-textarea {
-  border: 1px solid grey;
-  border-radius: 3px;
-  width: 90%;
-  height: 50px;
-  margin-inline-start: 5%;
-}
-.icon {
-  float: left;
-  font-size: 18px;
 }
 </style>

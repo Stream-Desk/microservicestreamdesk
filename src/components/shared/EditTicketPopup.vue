@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import AllTicketsDataService from "../service/All-ticketDataservices";
+// import AllTicketsDataService from "../service/All-ticketDataservices";
 
 export default {
   name: "EditTicketPopup",

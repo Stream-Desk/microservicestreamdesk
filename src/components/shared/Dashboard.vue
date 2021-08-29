@@ -21,17 +21,14 @@
   <v-system-bar color="primary" window id="system"> </v-system-bar>
   <v-container grid-list-xs>
     <v-row>
-      <div id="raise"></div>
-      <!-- <all-tickets>
-        <slot></slot>
-      </all-tickets> -->
-      <raise-ticket>
-        <slot></slot>
-      </raise-ticket>
-    </v-row>
+      <div id="raise">
+        <raise-ticket>
+          <slot></slot>
+        </raise-ticket>
+      </div>
+  </v-row>
   </v-container>
 </template>
-
 <script>
 import RaiseTicket from "../shared/RaiseTicket.vue";
 export default {
