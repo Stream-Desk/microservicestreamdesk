@@ -11,8 +11,8 @@
       </v-card-title>
     </v-card>
     <v-row id="tabs" align="center">
-      <v-card-text id="word"> Tickets </v-card-text>
-      <v-card-text id="word"> Drafts </v-card-text>
+      <v-card-text id="word"> <a href=""> Tickets</a> </v-card-text>
+      <v-card-text id="word"> <a href=""> Drafts</a></v-card-text>
     </v-row>
     <v-spacer></v-spacer>
     <v-btn icon id="fa"><i class="fas fa-bell"></i></v-btn>
@@ -71,7 +71,7 @@ export default {
   height: 56px;
   top: 5px;
   left: 52px;
-  font-family: Roboto;
+  font-family: sans serifs;
   font-weight: 400;
   font-style: normal;
   font-size: 30px;
@@ -118,9 +118,17 @@ export default {
   font-style: normal;
 }
 #word {
-  font-weight: 100;
+  font-weight: 400;
   font-size: 20px;
   left: 400px;
+}
+#tabs a {
+  color: #313131;
+  font-weight: 400;
+  font-family: sans serifs;
+  overflow: hidden;
+  transition: 0.7s all;
+  text-transform: capitalize;
 }
 #draft {
   padding-right: 25px;

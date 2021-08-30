@@ -193,9 +193,17 @@ export default {
   margin-left: 20%;
   width: 20px;
   margin-top: 20px;
-  color: white;
-  background-color: rgb(109, 190, 243);
+  color: rgb(244, 247, 60);
+  background: linear-gradient(to center rgb(60, 172, 247));
+  cursor: pointer;
   padding-left: -20px;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(rgb(60, 172, 247));
+  transition: 0.5s ease-in-out;
 }
 #title {
   padding-top: 10px;
@@ -258,13 +266,12 @@ textarea[type="textarea"] {
   color: rgb(0, 0, 0);
   text-decoration: none;
   letter-spacing: 2px;
-  text-transform: capitalize;
   resize: none;
   /* margin-left: 11%; */
 }
-textarea[type="textarea"]:focus {
+/* textarea[type="textarea"]:focus {
   background-color: rgb(202, 232, 241);
-}
+} */
 select {
   border: 1px solid grey;
   border-radius: 4px;
