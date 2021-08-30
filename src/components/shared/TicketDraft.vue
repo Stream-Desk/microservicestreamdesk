@@ -50,7 +50,9 @@ export default {
       this.dialog = true;
     },
     retrieveDraft() {
-      DraftsDataService.getAll()
+      var tickets =  tickets;
+       setInterval(() => {
+          DraftsDataService.getAll()
         .then((response) => {
           this.tickets = response.data;
           this.tickets.map((ticket) => {
@@ -62,6 +64,8 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+      },30000);
+    
     },
 
     refreshList() {

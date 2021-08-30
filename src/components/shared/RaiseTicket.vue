@@ -64,7 +64,7 @@
                   <label id="label-none">Attachment </label>
                 </v-col>
                 <v-col sm="9">
-                  <input type="file" ref="file" @change="selectFile" />
+                 
                 </v-col>
               </v-row>
               <v-card-actions class="submit">
@@ -100,20 +100,19 @@
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
 import DraftsDataService from "../../service/DraftTicketService";
+// import FileUpload from "../shared/FileUpload.vue";
 export default {
-  components: {},
+  components: { 
+    // FileUpload
+
+  },
   data() {
     return {
       ticket: {
         summary: "",
         category: "",
         description: "",
-        selectedFiles: undefined,
-        currentFile: undefined,
-        progress: 0,
-        message: "",
-
-        fileInfos: [],
+       
       },
       submitted: false,
 
@@ -157,37 +156,6 @@ export default {
     onOpen() {
       this.dialog = true;
     },
-  },
-
-  selectFile() {
-    this.selectedFiles = this.$refs.file.files;
-  },
-  upload() {
-    this.progress = 0;
-
-    this.currentFile = this.selectedFiles.item(0);
-    AllTicketsDataService.upload(this.currentFile, (event) => {
-      this.progress = Math.round((100 * event.loaded) / event.total);
-    })
-      .then((response) => {
-        this.message = response.data.message;
-        return AllTicketsDataService.getFiles();
-      })
-      .then((files) => {
-        this.fileInfos = files.data;
-      })
-      .catch(() => {
-        this.progress = 0;
-        this.message = "Could not upload the file!";
-        this.currentFile = undefined;
-      });
-
-    this.selectedFiles = undefined;
-  },
-  mounted() {
-    AllTicketsDataService.getFiles().then((response) => {
-      this.fileInfos = response.data;
-    });
   },
 };
 </script>
@@ -288,5 +256,8 @@ select {
   padding: 12px 8px;
   border-radius: 4px;
   height: 30px;
+}
+#input{
+  border: none;
 }
 </style>

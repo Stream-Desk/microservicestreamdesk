@@ -36,6 +36,7 @@ class AllTicketsDataService {
 
        
         formData.append("file", file);
+     console.log(formData);
 
         return http.post("/api/Tickets/Upload", formData, {
             headers: {

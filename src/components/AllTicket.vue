@@ -126,18 +126,21 @@ export default {
     },
 
     retrieveTickets() {
-      AllTicketsDataService.getAll()
+       var tickets =  tickets;
+       setInterval(() => {
+           AllTicketsDataService.getAll()
         .then((response) => {
           this.tickets = response.data;
           this.tickets.map((ticket) => {
             ticket.summary = this.getDisplayTicket(ticket.summary);
           });
-
           console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
         });
+       }, 30000);
+    
     },
 
     refreshList() {
