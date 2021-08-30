@@ -63,9 +63,7 @@
                 <v-col sm="3">
                   <label id="label-none">Attachment </label>
                 </v-col>
-                <v-col sm="9">
-                 
-                </v-col>
+                <v-col sm="9"> </v-col>
               </v-row>
               <v-card-actions class="submit">
                 <v-spacer></v-spacer>
@@ -102,9 +100,8 @@ import AllTicketsDataService from "../../service/All-ticketDataservices";
 import DraftsDataService from "../../service/DraftTicketService";
 // import FileUpload from "../shared/FileUpload.vue";
 export default {
-  components: { 
+  components: {
     // FileUpload
-
   },
   data() {
     return {
@@ -112,7 +109,6 @@ export default {
         summary: "",
         category: "",
         description: "",
-       
       },
       submitted: false,
 
@@ -257,7 +253,7 @@ select {
   border-radius: 4px;
   height: 30px;
 }
-#input{
+#input {
   border: none;
 }
 </style>
