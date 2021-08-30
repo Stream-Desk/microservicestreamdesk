@@ -109,12 +109,7 @@ export default {
         summary: "",
         category: "",
         description: "",
-        // selectedFiles: undefined,
-        // currentFile: undefined,
-        // progress: 0,
-        // message: "",
-
-        // fileInfos: [],
+       
       },
       submitted: false,
 
