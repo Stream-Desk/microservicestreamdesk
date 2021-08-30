@@ -34,6 +34,7 @@ class AllTicketsDataService {
     upload(file, onUploadProgress) {
         let formData = new FormData();
 
+       
         formData.append("file", file);
 
         return http.post("/api/Tickets/Upload", formData, {

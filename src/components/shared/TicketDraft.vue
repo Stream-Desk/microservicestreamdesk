@@ -13,7 +13,7 @@
                   id="tableMaterialCheck2"
                 />
                 <label class="form-check-label" for="tableMaterialCheck2"
-                  >Check 2</label
+                  >Draft</label
                 >
               </div>
             </td>
@@ -22,26 +22,7 @@
           
             <div class="hover">
                <i @click="editDraft(ticket.id)" class="far fa-edit"></i>
-              <i @click="onOpen" class="fas fa-trash">
-                <v-dialog
-                  v-model="dialog"
-                  persistent
-                  :overlay="false"
-                  max-width="500px"
-                  transition="dialog-transition"
-                >
-                  <v-card class="" elevation="" max-width="">
-                    <v-card-text>
-                      <p class="">Are you sure you to delete this ticket</p>
-                      <div class="text--primary"></div>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-btn text color=""> cancel </v-btn>
-                      <v-btn text color=""> ok </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog></i
-              >
+              <i @click="deleteDraft(ticket.id)" class="fas fa-trash"></i>              
             </div>
           </tr>
         </tbody>
@@ -146,5 +127,8 @@ tr:hover .hover {
 }
 input:hover {
   border: 1px solid black;
+}
+.form-check-label {
+  color: red;
 }
 </style>
