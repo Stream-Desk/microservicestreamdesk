@@ -19,10 +19,10 @@
             </td>
 
             <td>({{ ticket.category }})-{{ ticket.summary }}</td>
-          
+
             <div class="hover">
-               <i @click="editDraft(ticket.id)" class="far fa-edit"></i>
-              <i @click="deleteDraft(ticket.id)" class="fas fa-trash"></i>              
+              <i @click="editDraft(ticket.id)" class="far fa-edit"></i>
+              <i @click="deleteDraft(ticket.id)" class="fas fa-trash"></i>
             </div>
           </tr>
         </tbody>
@@ -50,22 +50,21 @@ export default {
       this.dialog = true;
     },
     retrieveDraft() {
-      var tickets =  tickets;
-       setInterval(() => {
-          DraftsDataService.getAll()
-        .then((response) => {
-          this.tickets = response.data;
-          this.tickets.map((ticket) => {
-            ticket.summary = this.getDisplayDraft(ticket.summary);
-          });
+      var tickets = tickets;
+      setInterval(() => {
+        DraftsDataService.getAll()
+          .then((response) => {
+            this.tickets = response.data;
+            this.tickets.map((ticket) => {
+              ticket.summary = this.getDisplayDraft(ticket.summary);
+            });
 
-          console.log(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      },10000);
-    
+            console.log(response.data);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }, 10000);
     },
 
     refreshList() {
@@ -100,7 +99,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 table {
   background-color: lightgray;
 }

@@ -4,13 +4,12 @@
     <div class="navigation-bar">
       <v-icon>mdi-bars</v-icon>
     </div>
- 
+
     <all-tickets></all-tickets>
   </div>
 </template>
 
 <script>
-
 import AllTickets from "../components/AllTicket.vue";
 
 export default {
@@ -18,7 +17,6 @@ export default {
 
   component: {
     AllTickets,
-    
   },
 };
 </script>

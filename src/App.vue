@@ -10,13 +10,11 @@
 <script>
 import Dashboard from "./components/shared/Dashboard.vue";
 
-
 export default {
   name: "App",
 
   components: {
     Dashboard,
-   
   },
   data: () => ({
     //

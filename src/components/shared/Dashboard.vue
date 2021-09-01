@@ -11,7 +11,7 @@
       </v-card-title>
     </v-card>
     <v-row id="tabs" align="center">
-      <router-link class="router" to="/Allticket" exact>Tickets</router-link>
+      <router-link class="router" to="/" exact>Tickets</router-link>
       <router-link class="router" to="/Drafts">Drafts</router-link>
     </v-row>
     <v-spacer></v-spacer>
@@ -42,7 +42,9 @@ export default {
       group: null,
       links: [{ text: "Dashboard", route: "/Drafts" }],
     };
+    
   },
+ 
   watch: {
     group() {
       this.drawer = false;

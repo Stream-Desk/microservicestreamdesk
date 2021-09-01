@@ -1,49 +1,46 @@
 import http from "../http-ticket";
 
 class DraftsDataService {
-    getAll() {
-        return http.get("/api/Drafts");
+  getAll() {
+    return http.get("/api/Drafts");
+  }
 
-    }
+  get(id) {
+    return http.get(`/api/Drafts/${id}`);
+  }
 
-    get(id) {
-        return http.get(`/api/Drafts/${id}`);
-    }
+  create(data) {
+    return http.post("/api/Drafts", data);
+  }
 
-    create(data) {
-        return http.post("/api/Drafts", data);
-    }
+  update(id, data) {
+    return http.put(`/api/Drafts/${id}`, data);
+  }
 
-    update(id, data) {
-        return http.put(`/api/Drafts/${id}`, data);
-    }
+  delete(id) {
+    return http.delete(`/api/Drafts/${id}`);
+  }
 
-    delete(id) {
-        return http.delete(`/api/Drafts/${id}`);
+  // deleteAll() {
+  //     return http.delete(`/tickets`);
+  // }
 
-    }
+  upload(file, onUploadProgress) {
+    let formData = new FormData();
 
-    // deleteAll() {
-    //     return http.delete(`/tickets`);
-    // }
+    formData.append("file", file);
 
+    return http.post("/api/Tickets/Upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress,
+    });
+  }
 
-    upload(file, onUploadProgress) {
-        let formData = new FormData();
-
-        formData.append("file", file);
-
-        return http.post("/api/Tickets/Upload", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-            onUploadProgress
-        });
-    }
-
-    getFiles() {
-        return http.get("/api/Tickets/Download");
-    }
+  getFiles() {
+    return http.get("/api/Tickets/Download");
+  }
 }
 
 export default new DraftsDataService();

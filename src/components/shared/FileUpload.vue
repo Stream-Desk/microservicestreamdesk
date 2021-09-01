@@ -12,18 +12,17 @@
         {{ progress }}%
       </div>
     </div>
-
     <label class="btn btn-default">
       <input type="file" ref="file" @change="selectFile" />
     </label>
 
     <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
-     Add file
+      Add file
     </button>
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
-    <!-- <div class="card">
+    <div class="card">
       <div class="card-header">List of Files</div>
       <ul class="list-group list-group-flush">
         <li
@@ -34,7 +33,7 @@
           <a :href="file.url">{{ file.name }}</a>
         </li>
       </ul>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -84,5 +83,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

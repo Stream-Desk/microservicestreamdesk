@@ -1,10 +1,11 @@
 <template v-slot:add>
-  <v-btn flat depressed id="contain" v-on="on" @click="onOpen">
+  <v-btn flat depressed id="contain" @click="onOpen">
     <i class="fas fa-plus" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
     <form ref="form">
       <v-card id="card" :elevation="hover ? 10 : 1" width="700px">
+         <i @click="close" class="fas fa-times" id="close"></i>
         <v-container grid-list-xs>
           <v-layout row wrap>
             <v-card-text>
@@ -62,6 +63,7 @@
               <v-row class="my-1">
                 <v-col sm="3">
                   <label id="label-none">Attachment </label>
+                  <FileUpload />
                 </v-col>
                 <v-col sm="9"> </v-col>
               </v-row>
@@ -76,7 +78,7 @@
                   rounded="pill"
                   text-center
                   id="buton"
-                  >Save</v-btn
+                  >Sava</v-btn
                 >
                 <v-btn
                   flat
@@ -98,20 +100,20 @@
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
 import DraftsDataService from "../../service/DraftTicketService";
-// import FileUpload from "../shared/FileUpload.vue";
+import FileUpload from "../shared/FileUpload.vue";
 export default {
   components: {
-    // FileUpload
+    FileUpload
   },
   data() {
     return {
       ticket: {
         summary: "",
         category: "",
-        description: "",      
+        description: "",
       },
       submitted: false,
-
+      dialogCancel: false,
       dialog: false,
     };
   },
@@ -122,6 +124,7 @@ export default {
         summary: this.ticket.summary,
         category: this.ticket.category,
         description: this.ticket.description,
+        status: false,
       };
 
       AllTicketsDataService.create(data)
@@ -151,6 +154,10 @@ export default {
 
     onOpen() {
       this.dialog = true;
+    },
+   
+    close() {
+      this.dialog = false;
     },
   },
 };
@@ -262,5 +269,12 @@ select {
 }
 #input {
   border: none;
+}
+#close{
+  font-size: 24px;
+  float: right;
+  margin-right: 3rem;
+  padding-top: 1.5rem;
+  color: red;
 }
 </style>

@@ -46,24 +46,26 @@
               >
               <i @click="editTickets(ticket.id)" class="far fa-edit"></i>
 
-              <i @click="deleteTickets(ticket.id)" class="fas fa-trash">
-                <v-dialog
-                  v-model="dialog"
-                  persistent
-                  :overlay="false"
-                  max-width="500px"
-                  transition="dialog-transition"
-                >
-                  <p>Are you sure you to delete this ticket</p>
-                  <v-btn small elevation="1" color="blue">Cancel</v-btn>
-                  <v-btn small elevation="1" color="success">Confirm</v-btn>
-                </v-dialog></i
-              >
+              <i class="fas fa-trash" @click="onOpen"> </i>
             </div>
           </tr>
         </tbody>
       </table>
     </v-card>
+    <v-dialog v-model="dialogDelete" transition="dialog-transition">
+      <v-card class="" elevation="" max-width="">
+        <v-card-text>
+          <p class="">Are you sure you want to delete this ticket</p>
+          <div class="text--primary"></div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text color="danger" @click=" close"> No </v-btn>
+          <v-btn text color="Success" @click="deleteTickets(ticket.id)">
+            Yes
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -101,6 +103,7 @@ export default {
         fields: ["$.id", "$.submitDate", "$.summary", "$.category"],
       },
       dialog: false,
+      dialogDelete: false,
     };
   },
 
@@ -110,7 +113,10 @@ export default {
 
   methods: {
     onOpen() {
-      this.dialog = true;
+      this.dialogDelete = true;
+    },
+    close() {
+      this.dialogDelete = false;
     },
     select() {
       this.selected = [];
@@ -126,21 +132,20 @@ export default {
     },
 
     retrieveTickets() {
-       var tickets =  tickets;
-       setInterval(() => {
-           AllTicketsDataService.getAll()
-        .then((response) => {
-          this.tickets = response.data;
-          this.tickets.map((ticket) => {
-            ticket.summary = this.getDisplayTicket(ticket.summary);
+      var tickets = tickets;
+      setInterval(() => {
+        AllTicketsDataService.getAll()
+          .then((response) => {
+            this.tickets = response.data;
+            this.tickets.map((ticket) => {
+              ticket.summary = this.getDisplayTicket(ticket.summary);
+            });
+            console.log(response.data);
+          })
+          .catch((e) => {
+            console.log(e);
           });
-          console.log(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-       }, 10000);
-    
+      }, 10000);
     },
 
     refreshList() {

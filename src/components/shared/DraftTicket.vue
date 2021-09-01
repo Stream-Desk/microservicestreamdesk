@@ -1,6 +1,6 @@
 <template>
-  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="700">  
-   <form ref="form" v-if="draftTicket">
+  <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="700">
+    <form ref="form" v-if="draftTicket">
       <v-card id="card" :elevation="hover ? 10 : 1" width="700px">
         <v-container grid-list-xs>
           <router-link to="/Drafts"><i class="fas fa-times"></i></router-link>
@@ -18,7 +18,7 @@
                     type="text"
                     v-model.lazy="summary"
                     outlined
-                    v-model=" draftTicket.summary"
+                    v-model="draftTicket.summary"
                   />
                 </v-col>
               </v-row>
@@ -27,8 +27,7 @@
                   <label for="input-none" id="label-none">Category</label>
                 </v-col>
                 <v-col sm="9">
-                 
-                  <select id="issues"   v-model=" draftTicket.category">
+                  <select id="issues" v-model="draftTicket.category">
                     <option>Slow Updates</option>
                     <option>Blue screen</option>
                     <option>Bugs</option>
@@ -46,7 +45,7 @@
                     max-rows="5"
                     type="textarea"
                     name="description"
-                    v-model=" draftTicket.description"
+                    v-model="draftTicket.description"
                   ></textarea>
                 </v-col>
               </v-row>
@@ -100,13 +99,13 @@ export default {
     };
   },
   methods: {
-     sendTicket() {
+    sendTicket() {
       var data = {
         summary: this.draftTicket.summary,
         category: this.draftTicket.category,
         description: this.draftTicket.description,
       };
-AllTicketsDataService.create(data)
+      AllTicketsDataService.create(data)
         .then((response) => {
           this.draftTicket.id = response.data.id;
           console.log(response.data);
@@ -115,7 +114,7 @@ AllTicketsDataService.create(data)
         .catch((e) => {
           console.log(e);
         });
-     },
+    },
     getDraft(id) {
       DraftsDataService.get(id)
         .then((response) => {

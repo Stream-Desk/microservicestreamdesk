@@ -1,4 +1,3 @@
-
 <template>
   <v-card :elevation="hover ? 24 : 3" class="mx-auto my-12" max-width="600">
     <v-container grid-list-xs>
@@ -126,7 +125,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 form input {
   margin-left: 30px;
 }
@@ -136,9 +135,3 @@ form label {
   font-size: 16px;
 }
 </style>
-
-
-
-
-
- 

@@ -1,54 +1,51 @@
 import http from "../http-ticket";
 
 class AllTicketsDataService {
-    getAll() {
-        return http.get("/api/Tickets");
+  getAll() {
+    return http.get("/api/Tickets");
+  }
 
-    }
+  get(id) {
+    return http.get(`/api/Tickets/${id}`);
+  }
 
-    get(id) {
-        return http.get(`/api/Tickets/${id}`);
-    }
+  create(data) {
+    return http.post("/api/Tickets", data);
+  }
 
-    create(data) {
-        return http.post("/api/Tickets", data);
-    }
+  update(id, data) {
+    return http.put(`/api/Tickets/${id}`, data);
+  }
 
-    update(id, data) {
-        return http.put(`/api/Tickets/${id}`, data);
-    }
+  delete(id) {
+    return http.delete(`/api/Tickets/${id}`);
+  }
 
-    delete(id) {
-        return http.delete(`/api/Tickets/${id}`);
+  // deleteAll() {
+  //     return http.delete(`/tickets`);
+  // }
 
-    }
+  // findByDate(date) {
+  //     return http.get(`/tickets?date=${date}`);
+  // }
 
-    // deleteAll() {
-    //     return http.delete(`/tickets`);
-    // }
+  upload(file, onUploadProgress) {
+    let formData = new FormData();
 
-    // findByDate(date) {
-    //     return http.get(`/tickets?date=${date}`);
-    // }
+    formData.append("files", file);
+    console.log(formData);
 
-    upload(file, onUploadProgress) {
-        let formData = new FormData();
+    return http.post("/api/Files", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress,
+    });
+  }
 
-       
-        formData.append("file", file);
-     console.log(formData);
-
-        return http.post("/api/Tickets/Upload", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
-            onUploadProgress
-        });
-    }
-
-    getFiles() {
-        return http.get("/api/Tickets/Download");
-    }
+  getFiles(id) {
+    return http.get(`/api/Files/${id}`);
+  }
 }
 
 export default new AllTicketsDataService();

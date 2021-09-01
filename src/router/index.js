@@ -1,18 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-// import Home from "../views/Home.vue";
-import AllTicket from "../components/AllTicket.vue"
-
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "Home",
-  //   component: Home,
-  // },
   {
-    path: "/Allticket",
+    path: "/",
     name: "AllTicket",
-    component: AllTicket
+    component: () => import("../components/AllTicket.vue"),
   },
   {
     path: "/Allticket/id",
