@@ -100,12 +100,17 @@
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
 import DraftsDataService from "../../service/DraftTicketService";
-import FileUpload from "../shared/FileUpload.vue";
+// import FileUpload from "../shared/FileUpload.vue";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 export default {
   components: {
-    FileUpload
+    // FileUpload,
   },
-  data() {
+  setup() {
+    return { v$: useVuelidate() };
+  },
+ data() {
     return {
       ticket: {
         summary: "",
@@ -115,6 +120,23 @@ export default {
       submitted: false,
       dialogCancel: false,
       dialog: false,
+    };
+  },
+
+
+  validation() {
+    return {
+      ticket: {
+        summary: {
+          required,
+        },
+        category: {
+          required,
+        },
+        description: {
+          required,
+        },
+      },
     };
   },
 
@@ -155,7 +177,7 @@ export default {
     onOpen() {
       this.dialog = true;
     },
-   
+
     close() {
       this.dialog = false;
     },
@@ -270,7 +292,7 @@ select {
 #input {
   border: none;
 }
-#close{
+#close {
   font-size: 24px;
   float: right;
   margin-right: 3rem;

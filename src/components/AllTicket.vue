@@ -59,7 +59,7 @@
           <div class="text--primary"></div>
         </v-card-text>
         <v-card-actions>
-          <v-btn text color="danger" @click=" close"> No </v-btn>
+          <v-btn text color="danger" @click="close"> No </v-btn>
           <v-btn text color="Success" @click="deleteTickets(ticket.id)">
             Yes
           </v-btn>

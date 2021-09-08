@@ -42,9 +42,8 @@ export default {
       group: null,
       links: [{ text: "Dashboard", route: "/Drafts" }],
     };
-    
   },
- 
+
   watch: {
     group() {
       this.drawer = false;
