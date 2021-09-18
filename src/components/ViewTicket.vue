@@ -5,7 +5,7 @@
         <v-card-text>
           <form v-if="currentTicket">
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Id:</label>
+              <label class="col-sm-2 col-form-label">TicketId:</label>
               <div class="col-sm-10">
                 <input
                   type="text"

@@ -23,7 +23,6 @@
               <br />
               <span class="material-icons" id="filters"> filter_alt </span>
             </th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -41,10 +40,10 @@
               </v-chip>
             </td>
             <div class="hover">
-              <v-btn color="success" @click="viewTicket(ticket.id)"
+              <v-btn class="view" color="success" @click="viewTicket(ticket.id)"
                 >Details</v-btn
               >
-              <i @click="editTickets(ticket.id)" class="far fa-edit"></i>
+              <i  @click="editTickets(ticket.id)" class="far fa-edit"></i>
 
               <i class="fas fa-trash" @click="onOpen"> </i>
             </div>
@@ -99,6 +98,7 @@ export default {
           ticketLabels.date,
           ticketLabels.summary,
           ticketLabels.category,
+           ticketLabels.status,
         ],
         fields: ["$.id", "$.submitDate", "$.summary", "$.category"],
       },
@@ -252,5 +252,8 @@ tr:hover .hover {
   border: 1px solid rgb(219, 217, 217);
   padding-left: 50px;
   border-radius: 3px;
+}
+.view,far fa-edit,fas fa-trash{
+  font-size: 8px
 }
 </style>

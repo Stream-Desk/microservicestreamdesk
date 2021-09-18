@@ -1,5 +1,5 @@
 <template v-slot:add>
-  <v-btn flat depressed id="contain" @click="onOpen">
+  <v-btn @click=" newTicket" flat depressed id="contain" v-on="onOpen">
     <i class="fas fa-plus" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
@@ -74,11 +74,11 @@
                   variant="outlined"
                   text
                   class="mb-5"
-                  @click="sendTicket"
+                
                   rounded="pill"
                   text-center
                   id="buton"
-                  >Sava</v-btn
+                  >Save</v-btn
                 >
                 <v-btn
                   flat
@@ -149,6 +149,7 @@ export default {
         status: false,
       };
 
+      
       AllTicketsDataService.create(data)
         .then((response) => {
           this.ticket.id = response.data.id;
@@ -158,6 +159,10 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+
+        
+
+
       DraftsDataService.create(data)
         .then((response) => {
           this.ticket.id = response.data.id;
@@ -172,9 +177,6 @@ export default {
     newTicket() {
       this.submitted = false;
       this.ticket = {};
-    },
-
-    onOpen() {
       this.dialog = true;
     },
 

@@ -21,9 +21,6 @@ class DraftsDataService {
     return http.delete(`/api/Drafts/${id}`);
   }
 
-  // deleteAll() {
-  //     return http.delete(`/tickets`);
-  // }
 
   upload(file, onUploadProgress) {
     let formData = new FormData();

@@ -9,9 +9,11 @@ class AllTicketsDataService {
     return http.get(`/api/Tickets/${id}`);
   }
 
-  create(data) {
+ create(data) {
     return http.post("/api/Tickets", data);
   }
+
+ 
 
   update(id, data) {
     return http.put(`/api/Tickets/${id}`, data);
@@ -21,14 +23,7 @@ class AllTicketsDataService {
     return http.delete(`/api/Tickets/BO/Delete/${id}`);
   }
 
-  // deleteAll() {
-  //     return http.delete(`/tickets`);
-  // }
-
-  // findByDate(date) {
-  //     return http.get(`/tickets?date=${date}`);
-  // }
-
+  
   upload(file, onUploadProgress) {
     let formData = new FormData();
 
