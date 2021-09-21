@@ -22,19 +22,21 @@
   <v-container grid-list-xs>
     <v-row>
       <div id="raise">
-        <raise-ticket>
+        <sendTicket>
           <slot></slot>
-        </raise-ticket>
+        </sendTicket>
       </div>
     </v-row>
   </v-container>
 </template>
 <script>
-import RaiseTicket from "../shared/RaiseTicket.vue";
+// import RaiseTicket from "../shared/RaiseTicket.vue";
+import sendTicket from "../SendTicket.vue";
 export default {
   name: "dashboard",
   components: {
-    RaiseTicket: RaiseTicket,
+    // RaiseTicket: RaiseTicket,
+    sendTicket,
   },
   data() {
     return {

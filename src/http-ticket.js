@@ -5,6 +5,4 @@ export default axios.create({
   headers: {
     "content-type": "application/json",
   },
-
-  method: "POST",
 });

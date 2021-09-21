@@ -9,21 +9,18 @@ class AllTicketsDataService {
     return http.get(`/api/Tickets/${id}`);
   }
 
- create(data) {
-    return http.post("/api/Tickets", data);
+  create(values) {
+    return http.post("/api/Tickets", values);
   }
 
- 
-
-  update(id, data) {
-    return http.put(`/api/Tickets/${id}`, data);
+  update(id, values) {
+    return http.put(`/api/Tickets/${id}`, values);
   }
 
-  delete(id) {
-    return http.delete(`/api/Tickets/BO/Delete/${id}`);
+  delete(id,values) {
+    return http.put(`/api/Tickets/BO/Delete/${id}`,values);
   }
 
-  
   upload(file, onUploadProgress) {
     let formData = new FormData();
 

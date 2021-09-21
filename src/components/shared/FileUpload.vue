@@ -16,7 +16,7 @@
       <input type="file" ref="file" @change="selectFile" />
     </label>
 
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
+    <button class="btn btn-success" @click="upload" :disabled="!selectedFiles">
       Add file
     </button>
 
@@ -42,8 +42,8 @@ export default {
   name: "FileUpload",
   data() {
     return {
-      selectedFiles: undefined,
-      currentFile: undefined,
+      selectedFiles: "",
+      currentFile: "",
       progress: 0,
       message: "",
       fileInfos: [],

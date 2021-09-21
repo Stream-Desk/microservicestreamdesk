@@ -9,34 +9,16 @@ class DraftsDataService {
     return http.get(`/api/Drafts/${id}`);
   }
 
-  create(data) {
-    return http.post("/api/Drafts", data);
+  create(values) {
+    return http.post("/api/Drafts", values);
   }
 
-  update(id, data) {
-    return http.put(`/api/Drafts/${id}`, data);
+  update(id, values) {
+    return http.put(`/api/Drafts/${id}`, values);
   }
 
   delete(id) {
     return http.delete(`/api/Drafts/${id}`);
-  }
-
-
-  upload(file, onUploadProgress) {
-    let formData = new FormData();
-
-    formData.append("file", file);
-
-    return http.post("/api/Tickets/Upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      onUploadProgress,
-    });
-  }
-
-  getFiles() {
-    return http.get("/api/Tickets/Download");
   }
 }
 

@@ -81,6 +81,19 @@
           </form>
         </v-card-text>
       </v-layout>
+      <hr />
+      <div class="reply">
+        <form>
+          <h6>Comment</h6>
+          <textarea
+            name="message"
+            cols="30"
+            rows="5"
+            placeholder="Write here"
+          ></textarea>
+          <v-btn class="view" color="primary" @click="sendComment">Send</v-btn>
+        </form>
+      </div>
     </v-container>
   </v-card>
 </template>
@@ -133,5 +146,20 @@ form label {
   font-weight: bold;
   color: black;
   font-size: 16px;
+}
+textarea {
+  width: 90%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 6px;
+
+  resize: vertical;
+}
+.view {
+  float: right;
+  right: 3.5rem;
+  margin-bottom: 16px;
 }
 </style>

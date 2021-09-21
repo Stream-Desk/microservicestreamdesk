@@ -1,11 +1,11 @@
 <template v-slot:add>
-  <v-btn @click=" newTicket" flat depressed id="contain" v-on="onOpen">
+  <v-btn @click="newTicket" flat depressed id="contain" v-on="onOpen">
     <i class="fas fa-plus" id="fa"></i>
   </v-btn>
   <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
     <form ref="form">
       <v-card id="card" :elevation="hover ? 10 : 1" width="700px">
-         <i @click="close" class="fas fa-times" id="close"></i>
+        <i @click="close" class="fas fa-times" id="close"></i>
         <v-container grid-list-xs>
           <v-layout row wrap>
             <v-card-text>
@@ -74,7 +74,6 @@
                   variant="outlined"
                   text
                   class="mb-5"
-                
                   rounded="pill"
                   text-center
                   id="buton"
@@ -100,17 +99,17 @@
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
 import DraftsDataService from "../../service/DraftTicketService";
-// import FileUpload from "../shared/FileUpload.vue";
+import FileUpload from "../shared/FileUpload.vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 export default {
   components: {
-    // FileUpload,
+    FileUpload,
   },
   setup() {
     return { v$: useVuelidate() };
   },
- data() {
+  data() {
     return {
       ticket: {
         summary: "",
@@ -122,7 +121,6 @@ export default {
       dialog: false,
     };
   },
-
 
   validation() {
     return {
@@ -149,7 +147,6 @@ export default {
         status: false,
       };
 
-      
       AllTicketsDataService.create(data)
         .then((response) => {
           this.ticket.id = response.data.id;
@@ -159,9 +156,6 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-
-        
-
 
       DraftsDataService.create(data)
         .then((response) => {
