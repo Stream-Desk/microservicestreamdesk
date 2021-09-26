@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import upload from "../service/file-upload";
+// import upload from "../service/file-upload";
 
 const STATUS_INITIAL = 0,
   STATUS_SAVING = 1,
@@ -90,40 +90,40 @@ export default {
     },
   },
   methods: {
-    reset() {
-      // reset form to initial state
-      this.currentStatus = STATUS_INITIAL;
-      this.uploadedFiles = [];
-      this.uploadError = null;
-    },
-    save(formData) {
-      // upload data to the server
-      this.currentStatus = STATUS_SAVING;
+    // reset() {
+    //   // reset form to initial state
+    //   this.currentStatus = STATUS_INITIAL;
+    //   this.uploadedFiles = [];
+    //   this.uploadError = null;
+    // },
+    // save(formData) {
+    //   // upload data to the server
+    //   this.currentStatus = STATUS_SAVING;
 
-      upload(formData)
-        .then((x) => {
-          this.uploadedFiles = [].concat(x);
-          this.currentStatus = STATUS_SUCCESS;
-        })
-        .catch((err) => {
-          this.uploadError = err.response;
-          this.currentStatus = STATUS_FAILED;
-        });
-    },
-    filesChange(fieldName, fileList) {
-      // handle file changes
-      const formData = new FormData();
+    //   upload(formData)
+    //     .then((x) => {
+    //       this.uploadedFiles = [].concat(x);
+    //       this.currentStatus = STATUS_SUCCESS;
+    //     })
+    //     .catch((err) => {
+    //       this.uploadError = err.response;
+    //       this.currentStatus = STATUS_FAILED;
+    //     });
+    // },
+    // filesChange(fieldName, fileList) {
+    //   // handle file changes
+    //   const formData = new FormData();
 
-      if (!fileList.length) return;
+    //   if (!fileList.length) return;
 
-      // append the files to FormData
-      Array.from(Array(fileList.length).keys()).map((x) => {
-        formData.append(fieldName, fileList[x], fileList[x].name);
-      });
+    //   // append the files to FormData
+    //   Array.from(Array(fileList.length).keys()).map((x) => {
+    //     formData.append(fieldName, fileList[x], fileList[x].name);
+    //   });
 
-      // save it
-      this.save(formData);
-    },
+    //   // save it
+    //   this.save(formData);
+    // },
   },
   mounted() {
     this.reset();
