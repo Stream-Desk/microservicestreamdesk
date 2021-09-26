@@ -36,7 +36,7 @@
             </td>
             <td>
               <v-chip class="" small flat>
-                {{ ticket.status }}
+                <span>{{ ticket.status }}</span>
               </v-chip>
             </td>
             <div class="hover">
@@ -76,6 +76,7 @@ import { ticketLabels } from "../utils/constants";
 import { xpath_getter } from "../utils/jasonHelpers";
 import ViewTicket from "./Tickets.vue";
 import RaiseTicket from "./shared/RaiseTicket.vue";
+
 export default {
   name: "AllTicket",
 
@@ -100,7 +101,12 @@ export default {
           ticketLabels.category,
           ticketLabels.status,
         ],
-        fields: ["$.id", "$.submitDate", "$.summary", "$.category"],
+        fields: ["$.ticketNumber", "$.submitDate", "$.summary", "$.category"],
+      },
+      label: {
+        open: "maroon",
+        resolve: "green",
+        pending: "yellow",
       },
       dialog: false,
       dialogDelete: false,
@@ -109,6 +115,20 @@ export default {
 
   created() {
     this.retrieveTickets();
+  },
+  computed: {
+    getClass() {
+      const classValue = this.label;
+      const statusClass = {
+        open: "maroon",
+        resolve: "green",
+        pending: "yellow",
+      };
+      return classValue + statusClass[this.tickets.status];
+    },
+    isToggable() {
+      return typeof this.toggleUrl !== "undefined";
+    },
   },
 
   methods: {
@@ -136,10 +156,16 @@ export default {
       setInterval(() => {
         AllTicketsDataService.getAll()
           .then((response) => {
+            
             this.tickets = response.data;
-            this.tickets.map((ticket) => {
-              ticket.summary = this.getDisplayTicket(ticket.summary);
-            });
+            this.tickets.map(
+              (ticket) => {
+                ticket.summary = this.getDisplayTicket(ticket.summary);
+              },
+              this.tickets.map((ticket) => {
+                ticket.id = this.getDisplayId(ticket.id);
+              })
+            );
             console.log(response.data);
           })
           .catch((e) => {
@@ -173,9 +199,14 @@ export default {
       summary = summary.length > 20 ? summary.substr(0, 20) + "..." : summary;
       return summary;
     },
+     getDisplayId(id) {
+     id = id.length > 3 ? id.substr(0,3) :id
+     return id;
+    },
 
     mounted() {
       this.retrieveTickets();
+      this.ticket.status;
     },
   },
 };
@@ -237,7 +268,7 @@ tr:hover .hover {
   padding: 5px;
   height: 35px;
   top: 223px;
-  left: 150px;
+  /* left: 150px; */
   color: rgb(0, 0, 0);
 }
 #contain {

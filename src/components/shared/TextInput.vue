@@ -5,8 +5,8 @@
   >
     <label :for="name">{{ label }}</label>
     <input
-      :name="summary"
-      :id="summary"
+      :name="name"
+      :id="name"
       :type="type"
       :value="inputValue"
       :placeholder="placeholder"
@@ -30,7 +30,7 @@ export default {
       default: "text",
     },
     value: {
-      type: String,
+      // type: String,
       default: "",
     },
     name: {

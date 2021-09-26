@@ -1,47 +1,44 @@
 <template>
-  <v-btn @click="newTicket" flat depressed id="contain" v-on="onOpen">
-    <i class="fas fa-plus" id="fa">Add Ticket</i>
-  </v-btn>
-  <v-dialog v-model="dialog" persistent class="form" v-if="!submitted">
-    <v-card :elevation="hover ? 10 : 1" width="700px" scrollable>
-      <v-card-title class="ticket" primary-title id="title">
-        New Ticket
-      </v-card-title>
-      <div>
-        <Form @submit="sendTicket" :validation-schema="schema">
-          <TextInput
-            name="summary"
-            type="text"
-            label="Summary"
-            placeholder="Summary"
-            success-message="Thank you!"
-          />
-          <Field
-            name="category"
-            type="category"
-            label="Category"
-            success-message="Thank you!"
-          >
-            <option disabled value="">Please select one</option>
-            <option>Bugs</option>
-            <option>Slow Update</option>
-            <option>Login</option>
-          </Field>
+  <div>
+    <Form @submit="sendTicket" :validation-schema="schema" v-if="!submitted">
+      <TextInput
+        name="name"
+        type="text"
+        label="Name"
+        placeholder="Enter your Name"
+        success-message="Thank you!"
+      />
+      <TextInput
+        name="summary"
+        type="text"
+        label="Summary"
+        placeholder="Summary"
+        success-message="Thank you!"
+      />
+      <Field
+        name="category"
+        type="category"
+        label="Category"
+        success-message="Thank you!"
+      >
+        <option disabled value="">Please select one</option>
+        <option>Bugs</option>
+        <option>Slow Update</option>
+        <option>Login</option>
+      </Field>
 
-          <TextArea
-            name="description"
-            type="desciption"
-            label="Desciption"
-            placeholder="Description"
-            success-message="Thank you!"
-          />
-          <Files />
-          <button class="submit-btn" type="submit">Submit</button>
-          <button class="submit-btm" type="submit" @click="saveTicket">Save</button>
-        </Form>
-      </div>
-    </v-card>
-  </v-dialog>
+      <TextArea
+        name="description"
+        type="desciption"
+        label="Desciption"
+        placeholder="Description"
+        success-message="Thank you!"
+      />
+      <Files />
+      <button class="submit-btn" type="submit">Submit</button>
+      <button class="submit-btm" type="submit" @click="saveTicket">Save</button>
+    </Form>
+  </div>
 </template>
 <script>
 import AllTicketsDataService from "../service/All-ticketDataservices";
@@ -63,6 +60,7 @@ export default {
   },
   setup() {
     const schema = Yup.object().shape({
+      name: Yup.string().required(),
       summary: Yup.string().required(),
       category: Yup.string().required(),
       description: Yup.string().required(),
@@ -91,8 +89,8 @@ export default {
           console.log(e);
         });
     },
-      saveTicket(values){
-        DraftsDataService.create(values)
+    saveTicket(values) {
+      DraftsDataService.create(values)
         .then((response) => {
           this.values = response.values;
           console.log(response.values);
@@ -112,7 +110,7 @@ export default {
     close() {
       this.dialog = false;
     },
-  }
+  },
 };
 </script>
 
@@ -154,8 +152,8 @@ form {
   transform: scale(1.1);
 }
 
-.submit-btm{
-   background: var(--primary-color);
+.submit-btm {
+  background: var(--primary-color);
   outline: none;
   border: none;
   color: #fff;
@@ -169,7 +167,6 @@ form {
   cursor: pointer;
   float: right;
   margin-right: 10px;
-  
 }
 
 .ticket {

@@ -47,7 +47,7 @@
       </div>
       <!--FAILED-->
       <div v-if="isFailed">
-        <h2>File failed to Upload.</h2>
+        <h5 id="error">File failed to Upload!</h5>
         <p>
           <a href="javascript:void(0)" @click="reset()">Try again</a>
         </p>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { upload } from "../service/file-upload";
+import upload from "../service/file-upload";
 
 const STATUS_INITIAL = 0,
   STATUS_SAVING = 1,
@@ -159,5 +159,8 @@ export default {
   font-size: 1.2em;
   text-align: center;
   padding: 10px 0;
+}
+h5 {
+  color: red;
 }
 </style>

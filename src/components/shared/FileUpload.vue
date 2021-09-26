@@ -13,12 +13,17 @@
       </div>
     </div>
     <label class="btn btn-default">
-      <input type="file" ref="file" @change="selectFile" />
+      <input
+        type="file"
+        ref="file"
+        @click="upload"
+        :disabled="isSaving"
+        multiple
+        @change="selectFile"
+      />
     </label>
 
-    <button class="btn btn-success" @click="upload" :disabled="!selectedFiles">
-      Add file
-    </button>
+    <button class="btn btn-success">Add file</button>
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
@@ -38,8 +43,13 @@
 </template>
 <script>
 import AllTicketsDataService from "../../service/All-ticketDataservices";
+const STATUS_INITIAL = 0,
+  STATUS_SAVING = 1,
+  STATUS_SUCCESS = 2,
+  STATUS_FAILED = 3;
 export default {
   name: "FileUpload",
+
   data() {
     return {
       selectedFiles: "",
@@ -49,9 +59,23 @@ export default {
       fileInfos: [],
     };
   },
+  computed: {
+    isInitial() {
+      return this.currentStatus === STATUS_INITIAL;
+    },
+    isSaving() {
+      return this.currentStatus === STATUS_SAVING;
+    },
+    isSuccess() {
+      return this.currentStatus === STATUS_SUCCESS;
+    },
+    isFailed() {
+      return this.currentStatus === STATUS_FAILED;
+    },
+  },
   methods: {
     selectFile() {
-      this.selectedFiles = this.$refs.file.files;
+      this.selectedFiles = this.$refs.file.files[0];
     },
 
     upload() {

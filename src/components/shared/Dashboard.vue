@@ -22,21 +22,21 @@
   <v-container grid-list-xs>
     <v-row>
       <div id="raise">
-        <sendTicket>
-          <slot></slot>
-        </sendTicket>
+        <PopupModal />
       </div>
     </v-row>
   </v-container>
 </template>
 <script>
 // import RaiseTicket from "../shared/RaiseTicket.vue";
-import sendTicket from "../SendTicket.vue";
+// import sendTicket from "../SendTicket.vue";
+import PopupModal from "../PopupModal.vue";
 export default {
   name: "dashboard",
   components: {
     // RaiseTicket: RaiseTicket,
-    sendTicket,
+    // sendTicket,
+    PopupModal,
   },
   data() {
     return {

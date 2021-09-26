@@ -89,6 +89,7 @@
             name="message"
             cols="30"
             rows="5"
+            v-model="comment.text"
             placeholder="Write here"
           ></textarea>
           <v-btn class="view" color="primary" @click="sendComment">Send</v-btn>
@@ -109,10 +110,28 @@ export default {
     return {
       currentTicket: null,
       message: "",
+      comment: {
+        text: "",
+      },
     };
   },
   updated: false,
   methods: {
+    sendComment() {
+      const data = {
+        text: this.comment.text,
+      };
+      AllTicketsDataService.createComment(data)
+        .then((response) => {
+          this.comment.id = response.data.id;
+          console.log(response.data);
+          this.submitted = true;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
     onSend: function (message) {
       alert(message);
     },

@@ -13,12 +13,16 @@ class AllTicketsDataService {
     return http.post("/api/Tickets", values);
   }
 
+  createComment(data) {
+    return http.post("/api/Comments", data);
+  }
+
   update(id, values) {
     return http.put(`/api/Tickets/${id}`, values);
   }
 
-  delete(id,values) {
-    return http.put(`/api/Tickets/BO/Delete/${id}`,values);
+  delete(id, values) {
+    return http.put(`/api/Tickets/BO/Delete/${id}`, values);
   }
 
   upload(file, onUploadProgress) {
@@ -35,8 +39,8 @@ class AllTicketsDataService {
     });
   }
 
-  getFiles(id) {
-    return http.get(`/api/Files/${id}`);
+  getFiles(fileId) {
+    return http.get(`/api/Files/${fileId}`);
   }
 }
 

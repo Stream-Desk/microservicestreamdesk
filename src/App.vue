@@ -2,7 +2,6 @@
   <v-app>
     <v-main>
       <dashboard></dashboard>
-      <sendTicket></sendTicket>
 
       <router-view></router-view>
     </v-main>
@@ -11,14 +10,12 @@
 
 <script>
 import Dashboard from "./components/shared/Dashboard.vue";
-// import sendTicket from "./components/SendTicket.vue";
 
 export default {
   name: "App",
 
   components: {
     Dashboard,
-    // sendTicket,
   },
   data: () => ({
     //
