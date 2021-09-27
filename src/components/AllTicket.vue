@@ -101,7 +101,7 @@ export default {
           ticketLabels.category,
           ticketLabels.status,
         ],
-        fields: ["$.ticketNumber", "$.submitDate", "$.summary", "$.category"],
+        fields: ["$.ty", "$.submitDate", "$.summary", "$.category"],
       },
       label: {
         open: "maroon",
@@ -156,16 +156,10 @@ export default {
       setInterval(() => {
         AllTicketsDataService.getAll()
           .then((response) => {
-            
             this.tickets = response.data;
-            this.tickets.map(
-              (ticket) => {
-                ticket.summary = this.getDisplayTicket(ticket.summary);
-              },
-              this.tickets.map((ticket) => {
-                ticket.id = this.getDisplayId(ticket.id);
-              })
-            );
+            this.tickets.map((ticket) => {
+              ticket.summary = this.getDisplayTicket(ticket.summary);
+            });
             console.log(response.data);
           })
           .catch((e) => {
@@ -198,10 +192,6 @@ export default {
     getDisplayTicket(summary) {
       summary = summary.length > 20 ? summary.substr(0, 20) + "..." : summary;
       return summary;
-    },
-     getDisplayId(id) {
-     id = id.length > 3 ? id.substr(0,3) :id
-     return id;
     },
 
     mounted() {

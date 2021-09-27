@@ -3,12 +3,14 @@
     <v-btn
       class="btn"
       @click="showModal"
-      flat
+      width="100"
+      color="primary"
+      text-color="white"
       depressed
       id="contain"
       v-on="onOpen"
     >
-      <i class="fas fa-plus" id="fa">Add Ticket</i>
+      <i class="fas fa-plus" id="fa">create Ticket</i>
     </v-btn>
     <button type="button"></button>
 
@@ -39,3 +41,8 @@ export default {
   },
 };
 </script>
+<style>
+.btn {
+  width: 30px;
+}
+</style>

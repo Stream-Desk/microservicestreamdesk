@@ -45,7 +45,7 @@
           </li>
         </ul>
       </div>
-      <!--FAILED-->
+      FAILED
       <div v-if="isFailed">
         <h5 id="error">File failed to Upload!</h5>
         <p>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-// import upload from "../service/file-upload";
+import upload from "../service/file-upload";
 
 const STATUS_INITIAL = 0,
   STATUS_SAVING = 1,
@@ -90,40 +90,46 @@ export default {
     },
   },
   methods: {
-    // reset() {
-    //   // reset form to initial state
-    //   this.currentStatus = STATUS_INITIAL;
-    //   this.uploadedFiles = [];
-    //   this.uploadError = null;
-    // },
-    // save(formData) {
-    //   // upload data to the server
-    //   this.currentStatus = STATUS_SAVING;
+    reset() {
+      // reset form to initial state
+      this.currentStatus = STATUS_INITIAL;
+      this.uploadedFiles = [];
+      this.uploadError = null;
+    },
+    save(formData) {
+      // upload data to the server
+      this.currentStatus = STATUS_SAVING;
 
-    //   upload(formData)
-    //     .then((x) => {
-    //       this.uploadedFiles = [].concat(x);
-    //       this.currentStatus = STATUS_SUCCESS;
-    //     })
-    //     .catch((err) => {
-    //       this.uploadError = err.response;
-    //       this.currentStatus = STATUS_FAILED;
-    //     });
-    // },
-    // filesChange(fieldName, fileList) {
-    //   // handle file changes
-    //   const formData = new FormData();
+      upload(formData)
+        .then((x) => {
+          this.uploadedFiles = [].concat(x);
+          this.currentStatus = STATUS_SUCCESS;
+        })
+        .catch((err) => {
+          this.uploadError = err.response;
+          this.currentStatus = STATUS_FAILED;
+        });
+    },
+    filesChange(fieldName, fileList) {
 
-    //   if (!fileList.length) return;
+     
+      // handle file changes
+      const formData = new FormData();
 
-    //   // append the files to FormData
-    //   Array.from(Array(fileList.length).keys()).map((x) => {
-    //     formData.append(fieldName, fileList[x], fileList[x].name);
-    //   });
+      if (!fileList.length) return;
 
-    //   // save it
-    //   this.save(formData);
-    // },
+      
+      // append the files to FormData
+      Array.from(Array(fileList.length).keys()).map((x) => {
+        formData.append(fieldName, fileList[x], fileList[x].name);
+      });
+
+    console.log(formData);
+
+      // save it
+      this.save(formData);
+      console.log(formData);
+    },
   },
   mounted() {
     this.reset();

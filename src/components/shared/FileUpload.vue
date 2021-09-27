@@ -1,37 +1,48 @@
 <template>
   <div>
-    <div v-if="currentFile" class="progress">
-      <div
-        class="progress-bar progress-bar-info progress-bar-striped"
-        role="progressbar"
-        :aria-valuenow="progress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="{ width: progress + '%' }"
+    <div v-if="progressInfos">
+      <div class="mb-2"
+        v-for="(progressInfo, index) in progressInfos"
+        :key="index"
       >
-        {{ progress }}%
+        <span>{{progressInfo.fileName}}</span>
+        <div class="progress">
+          <div class="progress-bar progress-bar-info"
+            role="progressbar"
+            :aria-valuenow="progressInfo.percentage"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            :style="{ width: progressInfo.percentage + '%' }"
+          >
+            {{progressInfo.percentage}}%
+          </div>
+        </div>
       </div>
     </div>
+
     <label class="btn btn-default">
-      <input
-        type="file"
-        ref="file"
-        @click="upload"
-        :disabled="isSaving"
-        multiple
-        @change="selectFile"
-      />
+      <input type="file" multiple @change="selectFile" />
     </label>
 
-    <button class="btn btn-success">Add file</button>
+    <button class="btn btn-success"
+      :disabled="!selectedFiles"
+      @click="uploadFiles"
+    >
+      Upload
+    </button>
 
-    <div class="alert alert-light" role="alert">{{ message }}</div>
+    <div v-if="message" class="alert alert-light" role="alert">
+      <ul>
+        <li v-for="(ms, i) in message.split('\n')" :key="i">
+          {{ ms }}
+        </li>
+      </ul>
+    </div>
 
     <div class="card">
       <div class="card-header">List of Files</div>
       <ul class="list-group list-group-flush">
-        <li
-          class="list-group-item"
+        <li class="list-group-item"
           v-for="(file, index) in fileInfos"
           :key="index"
         >
@@ -42,69 +53,54 @@
   </div>
 </template>
 <script>
-import AllTicketsDataService from "../../service/All-ticketDataservices";
-const STATUS_INITIAL = 0,
-  STATUS_SAVING = 1,
-  STATUS_SUCCESS = 2,
-  STATUS_FAILED = 3;
+import AllTicketsDataService from "../../service/All-ticketDataservices"
 export default {
-  name: "FileUpload",
-
-  data() {
+   data() {
     return {
-      selectedFiles: "",
-      currentFile: "",
-      progress: 0,
+      selectedFiles: undefined,
+      progressInfos: [],
       message: "",
+
       fileInfos: [],
     };
   },
-  computed: {
-    isInitial() {
-      return this.currentStatus === STATUS_INITIAL;
-    },
-    isSaving() {
-      return this.currentStatus === STATUS_SAVING;
-    },
-    isSuccess() {
-      return this.currentStatus === STATUS_SUCCESS;
-    },
-    isFailed() {
-      return this.currentStatus === STATUS_FAILED;
-    },
-  },
-  methods: {
+  methods:{
     selectFile() {
-      this.selectedFiles = this.$refs.file.files[0];
-    },
+      this.progressInfos = [];
+      this.selectedFiles = event.target.files;
+      },
+      uploadFiles() {
+      this.message = "";
 
-    upload() {
-      this.progress = 0;
-      this.currentFile = this.selectedFiles.item(0);
-      AllTicketsDataService.upload(this.currentFile, (event) => {
-        this.progress = Math.round((100 * event.loaded) / event.total);
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
+  },
+       upload(idx, file) {
+      this.progressInfos[idx] = { percentage: 0, fileName: file.name };
+
+     AllTicketsDataService.upload(file, (event) => {
+        this.progressInfos[idx].percentage = Math.round(100 * event.loaded / event.total);
       })
         .then((response) => {
-          this.message = response.data.message;
+          let prevMessage = this.message ? this.message + "\n" : "";
+          this.message = prevMessage + response.data.message;
+
           return AllTicketsDataService.getFiles();
         })
         .then((files) => {
           this.fileInfos = files.data;
         })
         .catch(() => {
-          this.progress = 0;
-          this.message = "Failed to upload the file!";
-          this.currentFile = undefined;
+          this.progressInfos[idx].percentage = 0;
+          this.message = "Could not upload the file:" + file.name;
         });
-      this.selectedFiles = undefined;
     },
-  },
-  mounted() {
+     mounted() {
     AllTicketsDataService.getFiles().then((response) => {
       this.fileInfos = response.data;
     });
-  },
-};
+     }
+    }
+}
 </script>
-
-<style></style>

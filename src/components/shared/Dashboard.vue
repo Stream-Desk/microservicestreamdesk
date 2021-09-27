@@ -23,18 +23,19 @@
     <v-row>
       <div id="raise">
         <PopupModal />
+        <raise-ticket></raise-ticket>
       </div>
     </v-row>
   </v-container>
 </template>
 <script>
-// import RaiseTicket from "../shared/RaiseTicket.vue";
+import RaiseTicket from "../shared/RaiseTicket.vue";
 // import sendTicket from "../SendTicket.vue";
 import PopupModal from "../PopupModal.vue";
 export default {
   name: "dashboard",
   components: {
-    // RaiseTicket: RaiseTicket,
+    RaiseTicket: RaiseTicket,
     // sendTicket,
     PopupModal,
   },

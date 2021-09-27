@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Files />
     <Form @submit="sendTicket" :validation-schema="schema" v-if="!submitted">
       <TextInput
         name="name"
@@ -34,7 +35,7 @@
         placeholder="Description"
         success-message="Thank you!"
       />
-      <Files />
+      
       <button class="submit-btn" type="submit">Submit</button>
       <button class="submit-btm" type="submit" @click="saveTicket">Save</button>
     </Form>
@@ -48,7 +49,7 @@ import * as Yup from "yup";
 import TextInput from "./shared/TextInput.vue";
 import TextArea from "./shared/TextArea.vue";
 import Field from "./shared/Field.vue";
-import Files from "./Files.vue";
+import Files from "./shared/FileUpload.vue";
 export default {
   name: "App",
   components: {

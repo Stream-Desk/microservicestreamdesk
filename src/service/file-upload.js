@@ -8,13 +8,14 @@ function upload(formData) {
     axios
       .post(url, formData)
       // get data
-      .then((files) => files.data)
+      .then((files) => files.data)      
       // add url field
       .then((files) =>
         files.map((img) =>
           Object.assign(img, { url: `${baseUrl}/api/Files${img.id}` })
-        )
+        )     
       )
+     
   );
 }
 
